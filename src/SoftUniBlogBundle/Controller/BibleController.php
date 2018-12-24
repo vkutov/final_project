@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 class BibleController extends Controller
 {
     /**
-     * @Route("/quote/add", name="add_quote")
+     * @Route("/bible/add", name="add_quote")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -37,7 +37,7 @@ class BibleController extends Controller
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
             try {
-                $file->move($this->getParameter('image_directory'),
+                $file->move($this->getParameter('article_directory'),
                     $fileName);
             } catch (FileException $ex) {
 
@@ -124,7 +124,7 @@ class BibleController extends Controller
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
             try {
-                $file->move($this->getParameter('image_directory'),
+                $file->move($this->getParameter('article_directory'),
                     $fileName);
             } catch (FileException $ex) {
 

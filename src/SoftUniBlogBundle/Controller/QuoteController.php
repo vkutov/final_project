@@ -41,7 +41,7 @@ class QuoteController extends Controller
 
 
                 try {
-                    $file->move($this->getParameter('article_directory'),
+                    $file->move($this->getParameter('image_directory'),
                         $fileName);
                 } catch (FileException $ex) {
 
@@ -159,38 +159,38 @@ class QuoteController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $article = $this
+        $quote = $this
             ->getDoctrine()
-            ->getRepository(Article::class)
+            ->getRepository(Quote::class)
             ->find($id);
 
-        if ($article === null) {
+        if ($quote === null) {
             return $this->redirectToRoute("blog_index");
         }
 
         /** @var User $currentUser */
         $currentUser = $this->getUser();
 
-        if (!$currentUser->isAuthor($article) && !$currentUser->isAdmin()) {
+        if (!$currentUser->isAuthor($quote) && !$currentUser->isAdmin()) {
             return $this->redirectToRoute("blog_index");
         }
 
-        $form = $this->createForm(ArticleType::class, $article);
+        $form = $this->createForm(QuoteType::class, $quote);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $currentUser = $this->getUser();
-            $article->setAuthor($currentUser);
+            $quote->setAuthor($currentUser);
             $em = $this->getDoctrine()->getManager();
-            $em->remove($article);
+            $em->remove($quote);
             $em->flush();
 
             return $this->redirectToRoute("blog_index");
         }
 
-        return $this->render('article/delete.html.twig',
+        return $this->render('quote/delete.html.twig',
             ['form' => $form->createView(),
-                'article' => $article]);
+                'quote' => $quote]);
     }
     /**
      * @Route("/allQuotes", name="allQuotes")

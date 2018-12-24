@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4afb5a4f-9d5d-4817-899c-9210c8f8b97c" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Resources/views/bible/delete.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/BibleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/BibleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/QuoteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/QuoteController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -51,11 +54,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BibleController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BibleController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/BibleController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="126" column="54" selection-start-line="126" selection-start-column="54" selection-end-line="126" selection-end-column="54" />
+            <state relative-caret-position="-3108">
+              <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+              <folding>
+                <element signature="e#48#107#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -72,15 +78,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QuoteController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="QuoteController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/QuoteController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-27">
-              <caret line="119" column="19" selection-start-line="119" selection-start-column="19" selection-end-line="119" selection-end-column="19" />
+            <state relative-caret-position="765">
+              <caret line="45" column="37" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
               <folding>
                 <element signature="e#48#107#0#PHP" expanded="true" />
-                <element signature="e#4547#4569#0#PHP" expanded="true" />
+                <element signature="e#4548#4570#0#PHP" expanded="true" />
+                <element signature="e#5859#5883#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="delete.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/bible/delete.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="731">
+              <caret line="43" selection-start-line="43" selection-end-line="43" />
             </state>
           </provider>
         </entry>
@@ -110,7 +126,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Soft</find>
       <find>registe</find>
       <find>form</find>
       <find>comments</find>
@@ -139,6 +154,7 @@
       <find>article_dir</find>
       <find>article_di</find>
       <find>article_d</find>
+      <find>BibleController</find>
       <find>article</find>
     </findStrings>
     <replaceStrings>
@@ -196,12 +212,12 @@
         <option value="$PROJECT_DIR$/var/cache/dev/appDevDebugProjectContainer.xml" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/ActorController.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
-        <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/BibleController.php" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/ArticleController.php" />
         <option value="$PROJECT_DIR$/var/logs/dev.log" />
         <option value="$PROJECT_DIR$/var/cache/dev/Container2z4kqja/appDevDebugProjectContainer.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/bible/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/QuoteController.php" />
+        <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/BibleController.php" />
       </list>
     </option>
   </component>
@@ -421,11 +437,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\PHP_Web\ark\admin_blog\admin_blog\app\Resources\views\bible" />
       <recent name="C:\xampp\htdocs\PHP_Web\admin_blog\app\Resources\views\bible" />
       <recent name="C:\xampp\htdocs\PHP_Web\admin_blog\app\Resources\views" />
       <recent name="C:\xampp\htdocs\PHP_Web\admin_blog\src\SoftUniBlogBundle\Form" />
       <recent name="C:\xampp\htdocs\PHP_Web\admin_blog\src\SoftUniBlogBundle\Entity" />
-      <recent name="C:\xampp\htdocs\PHP_Web\admin_blog\src\SoftUniBlogBundle\Controller" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\PHP_Web\ark\admin_blog\admin_blog" />
@@ -472,12 +488,12 @@
       <workItem from="1544428916535" duration="3604000" />
       <workItem from="1544522616910" duration="65109000" />
       <workItem from="1545500112172" duration="8234000" />
-      <workItem from="1545583778668" duration="11258000" />
+      <workItem from="1545583778668" duration="13908000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="151489000" />
+    <option name="totallyTimeSpent" value="154139000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -489,7 +505,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32843137" />
@@ -497,12 +513,12 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.013071896" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.27287582" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.83820224" visible="true" weight="0.1732224" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.27287582" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8345499" visible="true" weight="0.1732224" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.20272315" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32843137" />
-      <window_info id="Structure" order="1" sideWeight="0.16179775" side_tool="true" visible="true" weight="0.1732224" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32843137" />
+      <window_info id="Structure" order="1" sideWeight="0.16545013" side_tool="true" visible="true" weight="0.1732224" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -525,16 +541,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/AdminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="42" selection-start-line="42" selection-end-line="43" selection-end-column="31" />
-          <folding>
-            <element signature="e#1063#1093#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/article/create.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
@@ -850,13 +856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/BibleController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="126" column="54" selection-start-line="126" selection-start-column="54" selection-end-line="126" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/ArticleController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="131">
@@ -882,13 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/var/logs/dev.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="1634" column="433" selection-start-line="1634" selection-start-column="433" selection-end-line="1634" selection-end-column="440" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/bible/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -899,13 +891,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/bible/delete.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/var/logs/dev.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="6423" column="152" selection-start-line="6423" selection-start-column="152" selection-end-line="6423" selection-end-column="152" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/QuoteController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27">
-          <caret line="119" column="19" selection-start-line="119" selection-start-column="19" selection-end-line="119" selection-end-column="19" />
+        <state relative-caret-position="765">
+          <caret line="45" column="37" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
           <folding>
             <element signature="e#48#107#0#PHP" expanded="true" />
-            <element signature="e#4547#4569#0#PHP" expanded="true" />
+            <element signature="e#4548#4570#0#PHP" expanded="true" />
+            <element signature="e#5859#5883#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/BibleController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3108">
+          <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+          <folding>
+            <element signature="e#48#107#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
