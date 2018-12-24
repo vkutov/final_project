@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Actor</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ actor.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ actor.title }}</td>
+            </tr>
+            <tr>
+                <th>Meaning</th>
+                <td>{{ actor.meaning }}</td>
+            </tr>
+            <tr>
+                <th>Relatedactors</th>
+                <td>{% if actor.relatedActors %}{{ actor.relatedActors|join(', ') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ actor.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('actor_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
