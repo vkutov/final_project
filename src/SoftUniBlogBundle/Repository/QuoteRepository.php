@@ -41,4 +41,13 @@ class QuoteRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getSingleResult();
     }
+    public function relatedQuotes(int $id)
+    {
+        return  $this
+            ->createQueryBuilder('q')
+            ->where('q.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getSingleResult();
+    }
 }

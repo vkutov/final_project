@@ -74,12 +74,12 @@ class ActorController extends Controller
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewQuote($id)
+    public function viewActor($id)
     {
         /** @var Article $article */
-        $quote = $this
+        $actor = $this
             ->getDoctrine()
-            ->getRepository(Quote::class)
+            ->getRepository(Actor::class)
             ->find($id);
 //        $actors = $this
 //            ->getDoctrine()
@@ -87,14 +87,14 @@ class ActorController extends Controller
 //            ->relatedActors($id);
 //        ->find($id);
 //var_dump($actors);
-        $actors=$quote->getActors();
+        $actors=$actor->getRelatedActors();
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($quote);
+        $em->persist($actor);
         $em->flush();
 //var_dump($article,$comments);die();
-        return $this->render('bible/quote.html.twig',
-            ['quote' => $quote, 'actors' =>$actors]);
+        return $this->render('actor/actor.html.twig',
+            ['actor' => $actor, 'actors' =>$actors]);
     }
 
     /**

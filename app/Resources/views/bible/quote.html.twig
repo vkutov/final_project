@@ -17,13 +17,20 @@
                             Meaning: {{ quote.meaning }}
                         </p>
                         <p>
-                            Related Actors:
+                             Actors:
                             {% for actor in quote.actors%}
 
                              <a href="{{ path('actor_show', {id: actor.id}) }}">  {{ actor.title  }} </a>(Etymology:{{ actor.meaning }})
                             {% endfor %}
                         </p>
-
+                        <p>
+                            {% if related[0] is not null %}
+                            Related Quotes:
+                                {% for i in 0..related.count-1 %}
+                                   <br> <a href="{{ path('quote_view', {id: related[i].id}) }}">  {{ related[i].verse  }} </a>
+                                {% endfor %}
+                            {% endif %}
+                        </p>
                         {% if(quote.image) %}
                             <img src="{{ asset('uploads/images/' ~ quote.image) }}" width="400" height="200" >
                         {% endif %}
@@ -47,7 +54,6 @@
                 <hr />
         </div>
     </div>
-
 
 
 {% endblock %}

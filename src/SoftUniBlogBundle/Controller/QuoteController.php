@@ -28,18 +28,13 @@ class QuoteController extends Controller
     public function createAction(Request $request)
     {
         $quote = new Quote();
-
         $form = $this->createForm(QuoteType::class, $quote);
-
         $form->handleRequest($request);
 //        var_dump($form->getData()->getImage());die();
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->getData()->getImage();
             if(!is_null($file)) {
-
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-
-
                 try {
                     $file->move($this->getParameter('image_directory'),
                         $fileName);
@@ -50,10 +45,20 @@ class QuoteController extends Controller
                 $quote->setImage($fileName);
             }
             $currentUser = $this->getUser();
+            $relatedQuotes=$quote->getRelatedQuotes();
 //            var_dump($currentUser);die();
             $quote->setAuthor($currentUser);
 //            $article->setViewCount(0);
-
+    //            $quote->setRelatedQuotes($relatedQuotes);
+//            var_dump($quote->getRelatedQuotes()[0]);
+            $related='';
+            foreach($quote->getRelatedQuotes() as $key=>$value){
+                $related.=','.$value->getId();
+            }
+            if(strlen($related)>1) {
+                $related = substr($related, 1);
+                $quote->setRelatedQuotes($related);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($quote);
             $em->flush();
@@ -78,22 +83,28 @@ class QuoteController extends Controller
             ->getDoctrine()
             ->getRepository(Quote::class)
             ->find($id);
-//        $actors = $this
-//            ->getDoctrine()
-//            ->getRepository(Quote::class)
-//            ->relatedActors($id);
-//        ->find($id);
-//var_dump($actors);
+        $relation = $this
+            ->getDoctrine()
+            ->getRepository(Quote::class)
+            ->relatedQuotes($id);
+        $relation=$relation->getRelatedQuotes();
+        $relation=explode(",",$relation);
+        $related=[];
+        foreach($relation as $value){
+            $sql = $this
+                ->getDoctrine()
+                ->getRepository(Quote::class)
+                ->find($value);
+            $related[]=$sql;
+        }
+        $related['count']=count($relation);
         $actors=$quote->getActors();
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($quote);
-        $em->flush();
-//var_dump($article,$comments);die();
+//        $em = $this->getDoctrine()->getManager();
+//        $em->persist($quote);
+//        $em->flush();
         return $this->render('bible/quote.html.twig',
-            ['quote' => $quote, 'actors' =>$actors]);
+            ['quote' => $quote, 'actors' =>$actors,"related"=>$related]);
     }
-
     /**
      * @Route("/quote/edit/{id}", name="quote_edit")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
@@ -107,49 +118,66 @@ class QuoteController extends Controller
             ->getDoctrine()
             ->getRepository(Quote::class)
             ->find($id);
+//        var_dump($quote);die();
         if ($quote === null) {
             return $this->redirectToRoute("blog_index");
         }
         /** @var User $currentUser */
         $currentUser = $this->getUser();
-
         if (!$currentUser->isAuthor($quote) && !$currentUser->isAdmin()) {
             return $this->redirectToRoute("blog_index");
         }
-//        $quote=new Quote();
+//        $related = $this
+//            ->getDoctrine()
+//            ->getRepository(Quote::class)
+//            ->relatedQuotes($id);
+
+        $relation=$quote->getRelatedQuotes();
+//        var_dump($relation);die();
+        $relation_arr=explode(",",$relation);
+        $related=[];
+        foreach($relation_arr as $value){
+            $sql = $this
+                ->getDoctrine()
+                ->getRepository(Quote::class)
+                ->find($value);
+            $related[]=$sql;
+        }
+        $related['count']=count($relation_arr);
+        $quote->setRelatedQuotes($related);
+//        var_dump($quote->getRelatedQuotes());die();
         $form = $this->createForm(QuoteType::class, $quote);
+        $fileName=$quote->getImage();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
-
             /** @var UploadedFile $file */
             $file = $form->getData()->getImage();
+            $r=$form->getData()->getRelatedQuotes();
+            var_dump($r);die();
+            if(!is_null($file)){
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
-            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-
-            try {
-                $file->move($this->getParameter('image_directory'),
-                    $fileName);
-            } catch (FileException $ex) {
-
+                try {
+                    $file->move($this->getParameter('image_directory'),
+                        $fileName);
+                }
+                catch (FileException $ex) {
+                }
             }
-
             $quote->setImage($fileName);
-
             $currentUser = $this->getUser();
             $quote->setAuthor($currentUser);
+//            var_dump($relation);die();
+            $quote->setRelatedQuotes($relation);
             $em = $this->getDoctrine()->getManager();
             $em->merge($quote);
             $em->flush();
-
             return $this->redirectToRoute("blog_index");
         }
-
         return $this->render('bible/edit.html.twig',
             ['form' => $form->createView(),
-                'quote' => $quote]);
+                'quote' => $quote,'related'=>$related]);
     }
-
     /**
      * @Route("/quote/delete/{id}", name="quote_delete")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
@@ -188,7 +216,7 @@ class QuoteController extends Controller
             return $this->redirectToRoute("blog_index");
         }
 
-        return $this->render('quote/delete.html.twig',
+        return $this->render('bible/delete.html.twig',
             ['form' => $form->createView(),
                 'quote' => $quote]);
     }
@@ -205,18 +233,5 @@ class QuoteController extends Controller
         return $this->render('bible/allQuotes.html.twig',
             ['quotes' => $quotes]);
     }
-
-    /**
-     * @Route("/quote/like/{id}", name="article_likes")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function likes($id)
-    {
-//        var_dump($id);
-        return $this->redirectToRoute('blog_index');
-    }
-
 
 }

@@ -26,8 +26,7 @@ class QuoteType extends AbstractType
             ->add('verse', TextareaType::class)
             ->add('place', TextType::class)
             ->add('meaning', TextareaType::class)
-            ->add('image', FileType::class,
-                ['required'   => false])
+
 //            ->add('actors', ChoiceType::class, [
 //                'choices' => [
 //                    'id' => 'id',
@@ -50,6 +49,9 @@ class QuoteType extends AbstractType
                 'placeholder' => '',
                 'multiple' => true
             ])
+            ->add('image', FileType::class,
+                ['required'   => false,
+                'data' => null])
         ->add('save',SubmitType::class);
     }
 

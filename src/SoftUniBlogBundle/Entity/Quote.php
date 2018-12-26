@@ -66,9 +66,8 @@ class Quote
      */
     private $actors;
     /**
-     * @var array
-     *
-     * @ORM\Column(name="relatedQuotes", type="array")
+     * @var string
+     * @ORM\Column(name="relatedQuotes")
      */
     private $relatedQuotes;
     /**
@@ -166,7 +165,7 @@ class Quote
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function getRelatedQuotes()
     {
@@ -174,7 +173,7 @@ class Quote
     }
 
     /**
-     * @param array $relatedQuotes
+     * @param string $relatedQuotes
      */
     public function setRelatedQuotes($relatedQuotes)
     {

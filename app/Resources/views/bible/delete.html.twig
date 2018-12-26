@@ -4,23 +4,23 @@
 
     <div class="container body-content span=8 offset=2">
         <div class="well">
-            <form class="form-horizontal" action="{{ path('article_delete', {id: article.id}) }}" method="POST">
+            <form class="form-horizontal" action="{{ path('quote_delete', {id: quote.id}) }}" method="POST">
                 <fieldset>
-                    <legend>Delete Post</legend>
+                    <legend>Delete Quote</legend>
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="article_title">Post Title</label>
+                        <label class="col-sm-4 control-label" for="quote_verse">Quote Vesrse</label>
                         <div class="col-sm-4 ">
-                            <input type="text" class="form-control" id="article_title" placeholder="Post Title"
-                                   name="article[title]" value="{{ article.title }}" disabled>
+                            <input type="text" class="form-control" id="quote_title" placeholder="Post Title"
+                                   name="quote[title]" value="{{ quote.verse }}" disabled>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="article_content">Content</label>
+                        <label class="col-sm-4 control-label" for="quote_meaning">Meaning</label>
                         <div class="col-sm-6">
-                        <textarea class="form-control" rows="6" id="article_content"
-                                  name="article[content]" disabled>{{ article.content }}</textarea>
+                        <textarea class="form-control" rows="6" id="quote_meaning"
+                                  name="quote[meaning]" disabled>{{ quote.meaning }}</textarea>
                         </div>
                     </div>
 
@@ -28,7 +28,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-4">
-                            <a class="btn btn-default" href="{{ path('article_view', {id: article.id}) }}">Cancel</a>
+                            <a class="btn btn-default" href="{{ path('article_view', {id: quote.id}) }}">Cancel</a>
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </div>
                     </div>
