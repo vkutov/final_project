@@ -8,6 +8,7 @@ use SoftUniBlogBundle\Entity\Actor;
 use SoftUniBlogBundle\Entity\Article;
 use SoftUniBlogBundle\Entity\Comment;
 use SoftUniBlogBundle\Entity\Quote;
+//use SoftUniBlogBundle\Service\QuoteServices;
 use SoftUniBlogBundle\Entity\User;
 use SoftUniBlogBundle\Form\ArticleType;
 use SoftUniBlogBundle\Form\QuoteType;
@@ -19,6 +20,41 @@ use Symfony\Component\HttpFoundation\Request;
 
 class QuoteController extends Controller
 {
+
+//    public function objectToString(Quote $quote){
+//        $relatedQuotes='';
+//        foreach($quote->getRelatedQuotes() as $key=>$value){
+//            $relatedQuotes.=','.$value->getId();
+//        }
+//        $relatedQuotes=substr($relatedQuotes,1);
+//
+//        if(strlen($relatedQuotes)>1) {
+//            $related = substr($relatedQuotes, 1);
+//            $quote->setRelatedQuotes($relatedQuotes);
+//        }
+//
+//    }
+//    public function stringToObject(Quote $quote){
+//        $relation=$quote->getRelatedQuotes();
+//        $relation=explode(",",$relation);
+//        $related=[];
+//        foreach($relation as $value){
+//            $sql = $this
+//                ->getDoctrine()
+//                ->getRepository(Quote::class)
+//                ->find($value);
+//            $related[]=$sql;
+//        }
+//        $related['count']=count($relation);
+//        return $related;
+//    }
+    /**
+     * QuoteController constructor.
+     */
+//    public function __construct(QuoteServices $quote)
+//    {
+//    }
+
     /**
      * @Route("/quote/add", name="add_quote")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
@@ -48,17 +84,15 @@ class QuoteController extends Controller
             $relatedQuotes=$quote->getRelatedQuotes();
 //            var_dump($currentUser);die();
             $quote->setAuthor($currentUser);
-//            $article->setViewCount(0);
-    //            $quote->setRelatedQuotes($relatedQuotes);
-//            var_dump($quote->getRelatedQuotes()[0]);
             $related='';
-            foreach($quote->getRelatedQuotes() as $key=>$value){
-                $related.=','.$value->getId();
-            }
-            if(strlen($related)>1) {
-                $related = substr($related, 1);
-                $quote->setRelatedQuotes($related);
-            }
+//            foreach($quote->getRelatedQuotes() as $key=>$value){
+//                $related.=','.$value->getId();
+//            }
+//            if(strlen($related)>1) {
+//                $related = substr($related, 1);
+//                $quote->setRelatedQuotes($related);
+//            }
+            $rq=$this->objectToString($quote);
             $em = $this->getDoctrine()->getManager();
             $em->persist($quote);
             $em->flush();
@@ -69,7 +103,6 @@ class QuoteController extends Controller
         return $this->render('bible/add.html.twig',
             ['form' => $form->createView()]);
     }
-
 
     /**
      * @Route("/quote/{id}", name="quote_view")
@@ -83,21 +116,22 @@ class QuoteController extends Controller
             ->getDoctrine()
             ->getRepository(Quote::class)
             ->find($id);
-        $relation = $this
-            ->getDoctrine()
-            ->getRepository(Quote::class)
-            ->relatedQuotes($id);
-        $relation=$relation->getRelatedQuotes();
-        $relation=explode(",",$relation);
-        $related=[];
-        foreach($relation as $value){
-            $sql = $this
-                ->getDoctrine()
-                ->getRepository(Quote::class)
-                ->find($value);
-            $related[]=$sql;
-        }
-        $related['count']=count($relation);
+//        $relation = $this
+//            ->getDoctrine()
+//            ->getRepository(Quote::class)
+//            ->relatedQuotes($id);
+//        $relation=$quote->getRelatedQuotes();
+//        $relation=explode(",",$relation);
+//        $related=[];
+//        foreach($relation as $value){
+//            $sql = $this
+//                ->getDoctrine()
+//                ->getRepository(Quote::class)
+//                ->find($value);
+//            $related[]=$sql;
+//        }
+//        $related['count']=count($relation);
+        $related=$this->stringToObject($quote);
         $actors=$quote->getActors();
 //        $em = $this->getDoctrine()->getManager();
 //        $em->persist($quote);
@@ -131,19 +165,20 @@ class QuoteController extends Controller
 //            ->getDoctrine()
 //            ->getRepository(Quote::class)
 //            ->relatedQuotes($id);
-
-        $relation=$quote->getRelatedQuotes();
-//        var_dump($relation);die();
-        $relation_arr=explode(",",$relation);
-        $related=[];
-        foreach($relation_arr as $value){
-            $sql = $this
-                ->getDoctrine()
-                ->getRepository(Quote::class)
-                ->find($value);
-            $related[]=$sql;
-        }
-        $related['count']=count($relation_arr);
+//
+//        $relation=$quote->getRelatedQuotes();
+//        $relation_arr=explode(",",$relation);
+//        $related=[];
+//        foreach($relation_arr as $value){
+//            $sql = $this
+//                ->getDoctrine()
+//                ->getRepository(Quote::class)
+//                ->find($value);
+//            $related[]=$sql;
+//        }
+//        $related['count']=count($relation_arr);
+        $related=$this->stringToObject($quote);
+//        var_dump($related);
         $quote->setRelatedQuotes($related);
 //        var_dump($quote->getRelatedQuotes());die();
         $form = $this->createForm(QuoteType::class, $quote);
@@ -152,8 +187,6 @@ class QuoteController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $file */
             $file = $form->getData()->getImage();
-            $r=$form->getData()->getRelatedQuotes();
-            var_dump($r);die();
             if(!is_null($file)){
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
@@ -168,7 +201,7 @@ class QuoteController extends Controller
             $currentUser = $this->getUser();
             $quote->setAuthor($currentUser);
 //            var_dump($relation);die();
-            $quote->setRelatedQuotes($relation);
+            $rq=$this->objectToString($quote);
             $em = $this->getDoctrine()->getManager();
             $em->merge($quote);
             $em->flush();

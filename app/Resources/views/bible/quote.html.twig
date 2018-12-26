@@ -17,11 +17,12 @@
                             Meaning: {{ quote.meaning }}
                         </p>
                         <p>
+                            {% if quote.actors is not empty %}
                              Actors:
-                            {% for actor in quote.actors%}
-
-                             <a href="{{ path('actor_show', {id: actor.id}) }}">  {{ actor.title  }} </a>(Etymology:{{ actor.meaning }})
-                            {% endfor %}
+                                {% for actor in quote.actors%}
+                                 <a href="{{ path('actor_show', {id: actor.id}) }}">  {{ actor.title  }} </a>(Etymology:{{ actor.meaning }})
+                                {% endfor %}
+                            {% endif %}
                         </p>
                         <p>
                             {% if related[0] is not null %}
