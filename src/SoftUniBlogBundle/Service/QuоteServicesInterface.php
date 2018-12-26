@@ -11,7 +11,7 @@ namespace SoftUniBlogBundle\Service;
 
 use SoftUniBlogBundle\Entity\Quote;
 
-interface QuuteServicesInterface
+interface QuоteServicesInterface
 {
     public function objectToString(Quote $quote);
     public function stringToObject(Quote $quote);

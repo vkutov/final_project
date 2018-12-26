@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4afb5a4f-9d5d-4817-899c-9210c8f8b97c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Service/QuoteServices.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Service/QuuteServicesInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/bible/quote.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/bible/quote.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/QuoteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/QuoteController.php" afterDir="false" />
-    </list>
+    <list default="true" id="4afb5a4f-9d5d-4817-899c-9210c8f8b97c" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +41,7 @@
         <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/QuoteController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="53" column="53" lean-forward="true" selection-start-line="53" selection-start-column="53" selection-end-line="53" selection-end-column="53" />
+              <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="55" selection-end-column="7" />
               <folding>
                 <element signature="e#48#107#0#PHP" expanded="true" />
               </folding>
@@ -68,8 +61,8 @@
       <file leaf-file-name="services.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/config/services.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="35" column="23" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
+            <state relative-caret-position="258">
+              <caret line="35" selection-start-line="35" selection-end-line="36" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -207,8 +200,8 @@
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Service/QuoteServicesInterface.php" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Service/QuuteServicesInterface.php" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Service/QuoteServices.php" />
-        <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/QuoteController.php" />
         <option value="$PROJECT_DIR$/app/config/services.yml" />
+        <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/QuoteController.php" />
       </list>
     </option>
   </component>
@@ -488,12 +481,12 @@
       <workItem from="1544522616910" duration="65109000" />
       <workItem from="1545500112172" duration="8234000" />
       <workItem from="1545583778668" duration="45568000" />
-      <workItem from="1545818692546" duration="5342000" />
+      <workItem from="1545818692546" duration="6316000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="191141000" />
+    <option name="totallyTimeSpent" value="192115000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -900,7 +893,7 @@
     <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/QuoteController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="53" column="53" lean-forward="true" selection-start-line="53" selection-start-column="53" selection-end-line="53" selection-end-column="53" />
+          <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="55" selection-end-column="7" />
           <folding>
             <element signature="e#48#107#0#PHP" expanded="true" />
           </folding>
@@ -909,8 +902,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/services.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="35" column="23" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
+        <state relative-caret-position="258">
+          <caret line="35" selection-start-line="35" selection-end-line="36" selection-end-column="56" />
         </state>
       </provider>
     </entry>
