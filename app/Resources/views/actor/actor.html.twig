@@ -1,36 +1,59 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Actor</h1>
+{% block main %}
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ actor.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ actor.title }}</td>
-            </tr>
-            <tr>
-                <th>Meaning</th>
-                <td>{{ actor.meaning }}</td>
-            </tr>
-            <tr>
-                <th>Relatedactors</th>
-                <td>{% if actor.relatedActors %}{{ actor.relatedActors|join(', ') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ actor.image }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <article>
+                    <header>
+                        <h2>Title: "{{ actor.title }}"</h2>
+                    </header>
+                    {#<p>#}
+                        {#Place: {{ actor. }}#}
+                    {#</p>#}
+                    <p>
+                        Meaning: {{ actor.meaning }}
+                    </p>
+                    <p>
+                        {% if actor.quotes is not empty %}
+                            Quote:
+                            {% for quote in actor.quotes%}
+                                <a href="{{ path('quote_view', {id: quote.id}) }}">  {{ quote.verse }} </a>(Etymology:{{ quote.meaning }})
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    <p>
+                        {% if related[0] is not null %}
+                            Related Actors:
+                            {% for i in 0..related.count-1 %}
+                                <br> <a href="{{ path('actor_view', {id: related[i].id}) }}">  {{ related[i].title  }} </a>
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    {% if(actor.image) %}
+                        <img src="{{ asset('uploads/images/' ~ actor.image) }}" width="400" height="200" >
+                    {% endif %}
+                    {% if app.getUser().getId==actor.author.id or app.getUser().isAdmin() %}
 
-    {#<ul>#}
-        {#<li>#}
-            {#<a href="{{ path('actor_show') }}">Back to the list</a>#}
-        {#</li>#}
-    {#</ul>#}
+                    <p>
+                        <div class="pull-right">
+                            <a class="btn btn-danger btn-xs" href="{{ path('actor_delete', {'id':actor.id}) }}">delete &raquo;</a>
+                            <a class="btn btn-success btn-xs" href="{{ path('actor_edit', {'id':actor.id}) }}">edit &raquo;</a>
+                            {% endif %}
+                    <p>
+                    <div>
+                        <a class="btn btn-default btn-xs"
+                           href="{{ path('blog_index') }}">back &raquo;</a>
+                    </div>
+                    </p>
+                    </footer>
+                </article>
+            </div>
+
+            <hr />
+        </div>
+    </div>
+
+
 {% endblock %}

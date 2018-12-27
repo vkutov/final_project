@@ -4,7 +4,7 @@
 
     <div class="container body-content">
         <div class="row">
-            {% for quote in quotes %}
+            {% for quote in pagination %}
                 <div class="col-md-12">
                     <article>
                         <header>
@@ -13,6 +13,9 @@
 
                         <p>
                              {{ quote.place }}
+                        </p>
+                        <p>
+                            {{ quote.summary }}
                         </p>
                         {% if(quote.image) %}
                         <img src="{{ asset('uploads/images/' ~ quote.image) }}" width="400" height="200" >
@@ -37,7 +40,9 @@
             {% endfor %}
         </div>
     </div>
-
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 
 
 {% endblock %}

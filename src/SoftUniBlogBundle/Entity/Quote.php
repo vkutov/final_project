@@ -10,7 +10,7 @@ namespace SoftUniBlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Article
+ * Quote
  *
  * @ORM\Table(name="quotes")
  * @ORM\Entity(repositoryClass="SoftUniBlogBundle\Repository\QuoteRepository")
@@ -32,7 +32,6 @@ class Quote
      * @ORM\ManyToOne(targetEntity="SoftUniBlogBundle\Entity\User", inversedBy="quotes")
      *
      */
-
     private $author;
     /**
      * @var string
@@ -70,6 +69,11 @@ class Quote
      * @ORM\Column(name="relatedQuotes")
      */
     private $relatedQuotes;
+    /**
+     * @var string
+     */
+    private $summary;
+
     /**
      * @return User
      */
@@ -194,5 +198,22 @@ class Quote
     public function setActors($actors)
     {
         $this->actors = $actors;
+    }
+    /**
+     * @return string
+     */
+    public function getSummary()
+    {
+        if(strlen($this->meaning) > 50){
+            $this->setSummary();
+        }
+        return $this->summary;
+    }
+
+    public function setSummary()
+    {
+        $this->summary = substr($this->getMeaning(), 0,
+                strlen($this->getmeaning()) / 2
+            ) . "...";
     }
 }

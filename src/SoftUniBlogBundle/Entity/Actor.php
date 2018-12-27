@@ -21,7 +21,13 @@ class Actor
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="SoftUniBlogBundle\Entity\User", inversedBy="quotes")
+     *
+     */
+    private $author;
     /**
      * @var string
      *
@@ -35,16 +41,15 @@ class Actor
      * @ORM\Column(name="meaning", type="string", length=255, nullable=true)
      */
     private $meaning;
-
     /**
-     * @var ArrayCollection|Quote[]
-     *
-     * @ORM\OneToMany(targetEntity="SoftUniBlogBundle\Entity\Quote", mappedBy="actors")
+     * @var Quote[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote",inversedBy="actors")
      * @ORM\JoinTable(name="actors_quotes",
      *     joinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")}
-     *     )
+     * )
      */
+
     private $quotes;
 
     /**
@@ -60,11 +65,9 @@ class Actor
      * @ORM\OneToMany(targetEntity="SoftUniBlogBundle\Entity\Quote", mappedBy="author")
      */
     private $categories;
-
     /**
-     * @var array
-     *
-     * @ORM\Column(name="relatedActors", type="array")
+     * @var string
+     * @ORM\Column(name="relatedActors")
      */
     private $relatedActors;
     /**
@@ -205,11 +208,7 @@ class Actor
     }
 
     /**
-     * Set relatedActors
-     *
-     * @param array $relatedActors
-     *
-     * @return Actor
+     * @param string $relatedActors
      */
     public function setRelatedActors($relatedActors)
     {
@@ -219,9 +218,7 @@ class Actor
     }
 
     /**
-     * Get relatedActors
-     *
-     * @return array
+     * @return string
      */
     public function getRelatedActors()
     {
@@ -242,6 +239,22 @@ class Actor
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
     }
 }
 

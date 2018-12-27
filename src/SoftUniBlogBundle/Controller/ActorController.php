@@ -7,23 +7,49 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use SoftUniBlogBundle\Entity\Actor;
 use SoftUniBlogBundle\Entity\Article;
 use SoftUniBlogBundle\Entity\Comment;
-use SoftUniBlogBundle\Entity\Quote;
+//use SoftUniBlogBundle\Service\QuoteServices;
 use SoftUniBlogBundle\Entity\User;
-use SoftUniBlogBundle\Form\ActorType;
 use SoftUniBlogBundle\Form\ArticleType;
-use SoftUniBlogBundle\Form\QuoteType;
+use SoftUniBlogBundle\Form\ActorType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * Actor controller.
- *
- */
 class ActorController extends Controller
 {
+
+    public function objectToString(Actor $actor){
+        $relatedActors='';
+        foreach($actor->getRelatedActors() as $key=>$value){
+
+            $relatedActors.=','.$value->getId();
+        }
+        $relatedActors=substr($relatedActors,1);
+//        if(strlen($relatedActors)>1) {
+//
+//            $actor->setRelatedActors($relatedActors);
+//            var_dump($actor->getRelatedActors());die();
+//        }
+        return $relatedActors;
+    }
+    public function stringToObject(Actor $actor){
+        $relation=$actor->getRelatedActors();
+        $relation=explode(",",$relation);
+        $related=[];
+        foreach($relation as $value){
+            $sql = $this
+                ->getDoctrine()
+                ->getRepository(Actor::class)
+                ->find($value);
+            $related[]=$sql;
+        }
+        $related['count']=count($relation);
+        return $related;
+    }
+
+
     /**
      * @Route("/actor/add", name="add_actor")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
@@ -32,17 +58,13 @@ class ActorController extends Controller
      */
     public function createAction(Request $request)
     {
-        $quote = new Actor();
-        $form = $this->createForm(ActorType::class, $quote);
+        $actor = new Actor();
+        $form = $this->createForm(ActorType::class, $actor);
         $form->handleRequest($request);
-//        var_dump($form->getData()->getImage());die();
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->getData()->getImage();
             if(!is_null($file)) {
-
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-
-
                 try {
                     $file->move($this->getParameter('image_directory'),
                         $fileName);
@@ -50,55 +72,61 @@ class ActorController extends Controller
 
                 }
 
-                $quote->setImage($fileName);
+                $actor->setImage($fileName);
             }
-//            $currentUser = $this->getUser();
-//            var_dump($currentUser);die();
-//            $quote->setAuthor($currentUser);
-//            $article->setViewCount(0);
-
+            $currentUser = $this->getUser();
+            $actor->setAuthor($currentUser);
+//            $actor->setQuotes($currentUser);
+            $this->objectToString($actor);
+//            var_dump($actor->getRelatedActors());die();
+            $actor->setRelatedActors($this->objectToString($actor));
             $em = $this->getDoctrine()->getManager();
-            $em->persist($quote);
+            $em->persist($actor);
             $em->flush();
-
             return $this->redirectToRoute("blog_index");
         }
 
-        return $this->render('actor/add.html.twig',
+        return $this->render('bible/add.html.twig',
             ['form' => $form->createView()]);
     }
 
-
     /**
-     * @Route("/actor/{id}", name="actor_show")
+     * @Route("/actor/{id}", name="actor_view")
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewActor($id)
     {
-        /** @var Article $article */
+        /** @var Actor $actor*/
         $actor = $this
             ->getDoctrine()
             ->getRepository(Actor::class)
             ->find($id);
-//        $actors = $this
+//        $relation = $this
 //            ->getDoctrine()
 //            ->getRepository(Quote::class)
-//            ->relatedActors($id);
-//        ->find($id);
-//var_dump($actors);
-        $actors=$actor->getRelatedActors();
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($actor);
-        $em->flush();
-//var_dump($article,$comments);die();
+//            ->relatedQuotes($id);
+//        $relation=$quote->getRelatedQuotes();
+//        $relation=explode(",",$relation);
+//        $related=[];
+//        foreach($relation as $value){
+//            $sql = $this
+//                ->getDoctrine()
+//                ->getRepository(Quote::class)
+//                ->find($value);
+//            $related[]=$sql;
+//        }
+//        $related['count']=count($relation);
+        $related=$this->stringToObject($actor);
+        $quotes=$actor->getQuotes();
+//        $em = $this->getDoctrine()->getManager();
+//        $em->persist($quote);
+//        $em->flush();
         return $this->render('actor/actor.html.twig',
-            ['actor' => $actor, 'actors' =>$actors]);
+            ['actor' => $actor, 'quotes' =>$quotes,"related"=>$related]);
     }
-
     /**
-     * @Route("/quote/edit/{id}", name="quote_edit")
+     * @Route("/actor/edit/{id}", name="actor_edit")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param Request $request
      * @param $id
@@ -106,58 +134,76 @@ class ActorController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $article = $this
+        $actor = $this
             ->getDoctrine()
-            ->getRepository(Article::class)
+            ->getRepository(Actor::class)
             ->find($id);
-
-        if ($article === null) {
+//        var_dump($quote);die();
+        if ($actor === null) {
             return $this->redirectToRoute("blog_index");
         }
-
         /** @var User $currentUser */
-        $currentUser = $this->getUser();
-
-        if (!$currentUser->isAuthor($article) && !$currentUser->isAdmin()) {
-            return $this->redirectToRoute("blog_index");
-        }
-
-        $form = $this->createForm(ArticleType::class, $article);
+//        $currentUser = $this->getUser();
+//        if (!$currentUser->isAuthor($quote) && !$currentUser->isAdmin()) {
+//            return $this->redirectToRoute("blog_index");
+//        }
+//        $related = $this
+//            ->getDoctrine()
+//            ->getRepository(Quote::class)
+//            ->relatedQuotes($id);
+//
+//        $relation=$quote->getRelatedQuotes();
+//        $relation_arr=explode(",",$relation);
+//        $related=[];
+//        foreach($relation_arr as $value){
+//            $sql = $this
+//                ->getDoctrine()
+//                ->getRepository(Quote::class)
+//                ->find($value);
+//            $related[]=$sql;
+//        }
+//        $related['count']=count($relation_arr);
+//        $actor=$this->objectToString($actor);
+//        $actor->setRelatedQuotes($actor);
+        $related=$this->stringToObject($actor);
+        $actor->setRelatedActors($related);
+//        $related=$this->stringToObject($actor);
+//        $actor->setRelatedActors($related);
+//        var_dump($quote->getRelatedQuotes());die();
+        $form = $this->createForm(ActorType::class, $actor);
+        $fileName=$actor->getImage();
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
-
             /** @var UploadedFile $file */
             $file = $form->getData()->getImage();
+            if(!is_null($file)){
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
-            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-
-            try {
-                $file->move($this->getParameter('image_directory'),
-                    $fileName);
-            } catch (FileException $ex) {
-
+                try {
+                    $file->move($this->getParameter('image_directory'),
+                        $fileName);
+                }
+                catch (FileException $ex) {
+                }
             }
-
-            $article->setImage($fileName);
-
+            $actor->setImage($fileName);
             $currentUser = $this->getUser();
-            $article->setAuthor($currentUser);
+            $actor->setAuthor($currentUser);
+//            var_dump($relation);die();
+//            $rq=$this->objectToString($quote);
+            $ra=$this->objectToString($actor);
+            $actor->setRelatedActors($ra);
             $em = $this->getDoctrine()->getManager();
-            $em->merge($article);
+            $em->merge($actor);
             $em->flush();
-
             return $this->redirectToRoute("blog_index");
         }
-
-        return $this->render('article/edit.html.twig',
+        return $this->render('bible/edit.html.twig',
             ['form' => $form->createView(),
-                'article' => $article]);
+                'actor' => $actor,'related'=>$related]);
     }
-
     /**
-     * @Route("/quote/delete/{id}", name="quote_delete")
+     * @Route("/actor/delete/{id}", name="actor_delete")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param Request $request
      * @param $id
@@ -165,64 +211,52 @@ class ActorController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $article = $this
+        $actor = $this
             ->getDoctrine()
-            ->getRepository(Article::class)
+            ->getRepository(Actor::class)
             ->find($id);
 
-        if ($article === null) {
+        if ($actor === null) {
             return $this->redirectToRoute("blog_index");
         }
 
         /** @var User $currentUser */
         $currentUser = $this->getUser();
 
-        if (!$currentUser->isAuthor($article) && !$currentUser->isAdmin()) {
+        if (!$currentUser->isAuthor($actor) && !$currentUser->isAdmin()) {
             return $this->redirectToRoute("blog_index");
         }
-
-        $form = $this->createForm(ArticleType::class, $article);
+        $related=$this->stringToObject($actor);
+        $actor->setRelatedActors($related);
+        $form = $this->createForm(ActorType::class, $actor);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $currentUser = $this->getUser();
-            $article->setAuthor($currentUser);
+            $actor->setAuthor($currentUser);
             $em = $this->getDoctrine()->getManager();
-            $em->remove($article);
+            $em->remove($actor);
             $em->flush();
-
+//            die("here");
             return $this->redirectToRoute("blog_index");
         }
 
-        return $this->render('article/delete.html.twig',
+        return $this->render('actor/delete.html.twig',
             ['form' => $form->createView(),
-                'article' => $article]);
+                'actor' => $actor]);
     }
     /**
-     * @Route("/allQuotes", name="allQuotes")
+     * @Route("/allActors", name="allActors")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function allQuotes()
+    public function allActors()
     {
-        $quotes = $this->getDoctrine()
-            ->getRepository(Quote::class)
+        $actors = $this->getDoctrine()
+            ->getRepository(Actor::class)
             ->findAll();
 
-        return $this->render('bible/allQuotes.html.twig',
-            ['quotes' => $quotes]);
+        return $this->render('actor/allActors.html.twig',
+            ['actors' => $actors]);
     }
-
-    /**
-     * @Route("/quote/like/{id}", name="article_likes")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function likes($id)
-    {
-//        var_dump($id);
-        return $this->redirectToRoute('blog_index');
-    }
-
 
 }

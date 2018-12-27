@@ -260,8 +260,8 @@ class User implements UserInterface
      * @param Article $article
      * @return bool
      */
-    public function isAuthor(Quote $quote){
-      return  $quote->getAuthor() === $this->getId();
+    public function isAuthor($object){
+      return  $object->getAuthor() === $this->getId();
     }
 
     /**

@@ -15,14 +15,19 @@ class HomeController extends Controller
      * @Route("/", name="blog_index")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function allQuotes()
+    public function allQuotes(Request $request)
     {
         $quotes = $this->getDoctrine()
             ->getRepository(Quote::class)
             ->findAll();
-
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $quotes, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            3/*limit per page*/
+        );
         return $this->render('bible/allQuotes.html.twig',
-            ['quotes' => $quotes]);
+            ['quotes' => $quotes,'pagination' => $pagination]);
     }
 //    /**
 //     * @Route("/", name="blog_index")
@@ -43,8 +48,8 @@ class HomeController extends Controller
 //        return $this->render('home/index.html.twig',
 //            ['articles' => $articles,'pagination' => $pagination]);
 //    }
-//}
-//
+
+
 
 //public function listAction(Request $request)
 //{

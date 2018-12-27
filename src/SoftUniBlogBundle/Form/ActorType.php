@@ -27,15 +27,6 @@ class ActorType extends AbstractType
 //            ->add('verse', TextareaType::class)
 //            ->add('place', TextType::class)
             ->add('meaning', TextareaType::class)
-            ->add('image', FileType::class,
-                ['required'   => false])
-            ->add('relatedActors',EntityType::class,[
-                'required'   => false,
-                'class' => Actor::class,
-                'choice_label' => 'title',
-                'placeholder' => '',
-                'multiple' => true
-            ])
             ->add('quotes',EntityType::class,[
                 'required'   => false,
                 'class' => Quote::class,
@@ -43,7 +34,16 @@ class ActorType extends AbstractType
                 'placeholder' => '',
                 'multiple' => true
             ])
-
+            ->add('relatedActors',EntityType::class,[
+                'required'   => false,
+                'class' => Actor::class,
+                'choice_label' => 'title',
+                'placeholder' => '',
+                'multiple' => true
+            ])
+            ->add('image', FileType::class,
+                ['required'   => false,
+                    'data' => null])
             ->add('save',SubmitType::class);
     }
 
