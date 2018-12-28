@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <article>
+                    <header>
+                        <h2>Verse: "{{ quote.verse }}"</h2>
+                    </header>
+
+                    <p>
+                        Place: {{ quote.place }}
+                    </p>
+                    <p>
+                        Meaning: {{ quote.meaning }}
+                    </p>
+                    <p>
+                        {% if quote.actors is not empty %}
+                            Actors:
+                            {% for actor in quote.actors%}
+                                <a href="{{ path('actor_show', {id: actor.id}) }}">  {{ actor.title  }} </a>(Etymology:{{ actor.meaning }})
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    <p>
+                        {% if related[0] is not null %}
+                            Related Quotes:
+                            {% for i in 0..related.count-1 %}
+                                <br> <a href="{{ path('quote_view', {id: related[i].id}) }}">  {{ related[i].verse  }} </a>
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    {% if(quote.image) %}
+                        <img src="{{ asset('uploads/images/' ~ quote.image) }}" width="400" height="200" >
+                    {% endif %}
+                    {% if app.getUser().getId==quote.author.id or app.getUser().isAdmin() %}
+
+                    <p>
+                        <div class="pull-right">
+                            <a class="btn btn-danger btn-xs" href="{{ path('quote_delete', {'id':quote.id}) }}">delete &raquo;</a>
+                            <a class="btn btn-success btn-xs" href="{{ path('quote_edit', {'id':quote.id}) }}">edit &raquo;</a>
+                            {% endif %}
+                    <p>
+                    <div>
+                        <a class="btn btn-default btn-xs"
+                           href="{{ path('blog_index') }}">back &raquo;</a>
+                    </div>
+                    </p>
+                    </footer>
+                </article>
+            </div>
+
+            <hr />
+        </div>
+    </div>
+
+
+{% endblock %}
