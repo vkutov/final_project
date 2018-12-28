@@ -54,7 +54,6 @@ class QuoteType extends AbstractType
                 'data' => null])
         ->add('save',SubmitType::class);
     }
-
     /**
      * {@inheritdoc}
      */
@@ -64,8 +63,4 @@ class QuoteType extends AbstractType
             'data_class' => 'SoftUniBlogBundle\Entity\Quote'
         ));
     }
-
-
-
-
 }

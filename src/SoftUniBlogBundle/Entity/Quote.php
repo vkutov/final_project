@@ -29,7 +29,7 @@ class Quote
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="SoftUniBlogBundle\Entity\User", inversedBy="quotes")
+     * @ORM\ManyToOne(targetEntity="SoftUniBlogBundle\Entity\User")
      *
      */
     private $author;
@@ -64,6 +64,15 @@ class Quote
      * )
      */
     private $actors;
+    /**
+     * @var Category[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Category",inversedBy="quotes")
+     * @ORM\JoinTable(name="cat_quotes",
+     *     joinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")}
+     * )
+     */
+    private $categories;
     /**
      * @var string
      * @ORM\Column(name="relatedQuotes")
@@ -215,5 +224,21 @@ class Quote
         $this->summary = substr($this->getMeaning(), 0,
                 strlen($this->getmeaning()) / 2
             ) . "...";
+    }
+
+    /**
+     * @return Category[]
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param Category[] $categories
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
     }
 }

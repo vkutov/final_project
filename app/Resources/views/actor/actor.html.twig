@@ -17,9 +17,9 @@
                     </p>
                     <p>
                         {% if actor.quotes is not empty %}
-                            Quote:
+                            Quote(s):
                             {% for quote in actor.quotes%}
-                                <a href="{{ path('quote_view', {id: quote.id}) }}">  {{ quote.verse }} </a>(Etymology:{{ quote.meaning }})
+                                <br><a href="{{ path('quote_view', {id: quote.id}) }}">  {{ quote.verse }} </a>(Description:{{ quote.summary }})
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -34,7 +34,7 @@
                     {% if(actor.image) %}
                         <img src="{{ asset('uploads/images/' ~ actor.image) }}" width="400" height="200" >
                     {% endif %}
-                    {% if app.getUser().getId==actor.author.id or app.getUser().isAdmin() %}
+                    {% if app.getUser().getId==actor.author or app.getUser().isAdmin() %}
 
                     <p>
                         <div class="pull-right">

@@ -20,7 +20,7 @@
                         {% if quote.actors is not empty %}
                             Actors:
                             {% for actor in quote.actors%}
-                                <a href="{{ path('actor_show', {id: actor.id}) }}">  {{ actor.title  }} </a>(Etymology:{{ actor.meaning }})
+                                <a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.title  }} </a>(Etymology:{{ actor.meaning }})
                             {% endfor %}
                         {% endif %}
                     </p>

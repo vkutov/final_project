@@ -256,10 +256,7 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @param Article $article
-     * @return bool
-     */
+
     public function isAuthor($object){
       return  $object->getAuthor() === $this->getId();
     }

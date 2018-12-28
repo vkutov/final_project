@@ -1,7 +1,6 @@
 <?php
 //php bin/console doctrine:schema:update --force
 namespace SoftUniBlogBundle\Form;
-
 use SoftUniBlogBundle\Entity\Actor;
 use SoftUniBlogBundle\Entity\Article;
 use SoftUniBlogBundle\Entity\Quote;

@@ -24,7 +24,7 @@ class Actor
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="SoftUniBlogBundle\Entity\User", inversedBy="quotes")
+     * @ORM\ManyToOne(targetEntity="SoftUniBlogBundle\Entity\User")
      *
      */
     private $author;
@@ -49,22 +49,22 @@ class Actor
      *     inverseJoinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")}
      * )
      */
-
     private $quotes;
-
+    /**
+     * @var Category[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Category",inversedBy="actors")
+     * @ORM\JoinTable(name="cat_actors",
+     *     joinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")}
+     * )
+     */
+    private $categories;
     /**
      * @var ArrayCollection|Quote[]
      *
      * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event", mappedBy="author")
      */
     private $events;
-
-    /**
-     * @var ArrayCollection|Quote[]
-     *
-     * @ORM\OneToMany(targetEntity="SoftUniBlogBundle\Entity\Quote", mappedBy="author")
-     */
-    private $categories;
     /**
      * @var string
      * @ORM\Column(name="relatedActors")

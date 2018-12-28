@@ -20,7 +20,13 @@ class Category
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="SoftUniBlogBundle\Entity\User")
+     *
+     */
+    private $author;
     /**
      * @var string
      *
@@ -36,19 +42,23 @@ class Category
     private $meaning;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(name="quotes", type="array")
-     */
-    private $quotes;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="actors", type="array")
+     * @var Actor[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Actor")
+     * @ORM\JoinTable(name="cat_actors",
+     *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")}
+     * )
      */
     private $actors;
-
+    /**
+     * @var Quote[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote")
+     * @ORM\JoinTable(name="cat_quotes",
+     *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")}
+     * )
+     */
+    private $quotes;
     /**
      * @var array
      *
@@ -68,7 +78,7 @@ class Category
      *
      * @ORM\Column(name="relatedCategories", type="array", nullable=true)
      */
-    private $relatedCategories;
+//    private $relatedCategories;
 
     /**
      * @var string
@@ -278,6 +288,22 @@ class Category
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
     }
 }
 

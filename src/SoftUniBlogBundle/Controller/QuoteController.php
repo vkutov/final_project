@@ -31,7 +31,6 @@ class QuoteController extends Controller
 //            $quote->setRelatedQuotes($relatedQuotes);
 //        }
         return $relatedQuotes;
-
     }
     public function stringToObject(Quote $quote){
         $relation=$quote->getRelatedQuotes();
@@ -174,7 +173,7 @@ class QuoteController extends Controller
 //        }
 //        $related['count']=count($relation_arr);
         $related=$this->stringToObject($quote);
-        var_dump($related);
+//        var_dump($related);
         $quote->setRelatedQuotes($related);
 //        var_dump($quote->getRelatedQuotes());die();
         $form = $this->createForm(QuoteType::class, $quote);
@@ -215,16 +214,13 @@ class QuoteController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-
         $quote = $this
             ->getDoctrine()
             ->getRepository(Quote::class)
             ->find($id);
-
         if ($quote === null) {
             return $this->redirectToRoute("blog_index");
         }
-
         /** @var User $currentUser */
         $currentUser = $this->getUser();
         if (!$currentUser->isAuthor($quote) && !$currentUser->isAdmin()) {
