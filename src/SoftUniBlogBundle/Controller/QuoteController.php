@@ -66,6 +66,7 @@ class QuoteController extends Controller
 //        var_dump($form->getData()->getImage());die();
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->getData()->getImage();
+//            var_dump($form->getData()->getActors());die("create");
             if(!is_null($file)) {
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
                 try {
@@ -195,6 +196,7 @@ class QuoteController extends Controller
             $currentUser = $this->getUser();
             $quote->setAuthor($currentUser);
             $rq=$this->objectToString($quote);
+//            var_dump($form->getData()->getActors());die();
             $quote->setRelatedQuotes($rq);
             $em = $this->getDoctrine()->getManager();
             $em->merge($quote);
@@ -248,12 +250,26 @@ class QuoteController extends Controller
      * @Route("/allQuotes", name="allQuotes")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function allQuotes()
+//    public function allQuotes()
+//    {
+//        $quotes = $this->getDoctrine()
+//            ->getRepository(Quote::class)
+//            ->findAll();
+//        return $this->render('bible/allQuotes.html.twig',
+//            ['quotes' => $quotes]);
+//    }
+    public function allQuotes(Request $request)
     {
         $quotes = $this->getDoctrine()
             ->getRepository(Quote::class)
             ->findAll();
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $quotes, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            3/*limit per page*/
+        );
         return $this->render('bible/allQuotes.html.twig',
-            ['quotes' => $quotes]);
+            ['quotes' => $quotes,'pagination' => $pagination]);
     }
 }

@@ -24,7 +24,7 @@ class Actor
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="SoftUniBlogBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="SoftUniBlogBundle\Entity\User" ,inversedBy="actors")
      *
      */
     private $author;
@@ -43,7 +43,7 @@ class Actor
     private $meaning;
     /**
      * @var Quote[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote",inversedBy="actors")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote",mappedBy="actors")
      * @ORM\JoinTable(name="actors_quotes",
      *     joinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")}
@@ -70,6 +70,10 @@ class Actor
      * @ORM\Column(name="relatedActors")
      */
     private $relatedActors;
+    /**
+     * @var string
+     */
+    private $summary;
     /**
      * @var string
      *
@@ -256,5 +260,23 @@ class Actor
     {
         $this->author = $author;
     }
+    /**
+     * @return string
+     */
+    public function getSummary()
+    {
+        if(strlen($this->meaning) > 50){
+            $this->setSummary();
+        }
+        return $this->summary;
+    }
+
+    public function setSummary()
+    {
+        $this->summary = substr($this->getMeaning(), 0,
+                strlen($this->getmeaning()) / 2
+            ) . "...";
+    }
+
 }
 

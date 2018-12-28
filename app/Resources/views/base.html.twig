@@ -45,25 +45,18 @@
 
                         {% if app.user %}
 
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <li>
-                                    <a href="{{ path('all_users') }}">
-                                        Admin Panel
-                                    </a>
-                                </li>
 
-                            {% endif %}
                             {#<li>#}
                                 {#<a href="{{ path('myArticles') }}">#}
                                     {#My Articles#}
                                 {#</a>#}
                             {#</li>#}
 
-                            <li>
-                                <a href="{{ path('allQuotes') }}">
-                                    All Quotes
-                                </a>
-                            </li>
+                            {#<li>#}
+                                {#<a href="{{ path('allQuotes') }}">#}
+                                    {#All Quotes#}
+                                {#</a>#}
+                            {#</li>#}
                             <li>
                                 <a href="{{ path('add_category') }}">
                                     Add Category
@@ -79,16 +72,16 @@
                                     Add Actor
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{ path('user_profile') }}">
-                                    My Profile
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ path('security_logout') }}">
-                                    Logout
-                                </a>
-                            </li>
+                            {#<li>#}
+                                {#<a href="{{ path('user_profile') }}">#}
+                                    {#My Profile#}
+                                {#</a>#}
+                            {#</li>#}
+                            {#<li>#}
+                                {#<a href="{{ path('security_logout') }}">#}
+                                    {#Logout#}
+                                {#</a>#}
+                            {#</li>#}
                         {% else %}
                             <li>
                                 <a href="{{ path('user_register') }}">
@@ -113,15 +106,68 @@
         <div class="row">
             <div id="main" class="col-sm-9">
                 {% block main %}{% endblock %}
+                {% if app.user %}
+                <p>The night is nearly over; the day is almost here. So let us put aside the deeds of darkness and put on the armor of light(Romans 13:12).</p>
+                {% endif %}
             </div>
         </div>
     {% endblock %}
 </div>
+{% if app.user %}
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            {% if is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a href="{{ path('all_users') }}">
+                        Admin Panel
+                    </a>
+                </li>
+            {% endif %}
+            <li>
+                <a href="{{ path('security_logout') }}">
+                    Logout
+                </a>
+            </li>
+            {#{% if app.user %}#}
+            {#<a href="{{ path('article_create') }}" class="navbar-brand">#}
+            {#Create Article#}
+            {#</a>#}
+            {#{% endif %}#}
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
 
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                    {#<li>#}
+                    {#<a href="{{ path('myArticles') }}">#}
+                    {#My Articles#}
+                    {#</a>#}
+                    {#</li>#}
+                    <li>
+                        <a href="{{ path('allQuotes') }}">
+                            All Quotes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('allActors') }}">
+                            All Actors
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% else %}
+
+{% endif %}
 {% block footer %}
     <footer>
         <div class="container modal-footer">
-            <p>The night is nearly over; the day is almost here. So let us put aside the deeds of darkness and put on the armor of light(Romans 13:12).</p>
 
         </div>
     </footer>

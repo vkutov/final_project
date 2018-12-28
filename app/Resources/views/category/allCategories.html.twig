@@ -1,29 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-
+    <h1>Categories To Avoid</h1>
+    <h4>"Take no part in the unfruitful works of darkness, but instead expose them."(Ephesians 5:11)</h4>
     <div class="container body-content">
         <div class="row">
-            {% for quote in pagination %}
+            {% for categories in pagination %}
                 <div class="col-md-12">
                     <article>
                         <header>
-                            <h2>" {{ quote.verse }}"</h2>
+                            <h2>" {{ categories.title }}"</h2>
                         </header>
 
                         <p>
-                             {{ quote.place }}
+                            {{ categories.summary }}
                         </p>
-                        <p>
-                            {{ quote.summary }}
-                        </p>
-                        {% if(quote.image) %}
-                        <img src="{{ asset('uploads/images/' ~ quote.image) }}" width="400" height="200" >
+                        {% if(categories.image) %}
+                        <img src="{{ asset('uploads/images/' ~ categories.image) }}" width="400" height="200" >
                         {% endif %}
                         <footer>
                             <div class="pull-right">
                                 <a class="btn btn-default btn-xs"
-                                   href="{{ path('quote_view', {'id': quote.id}) }}">Read more &raquo;</a>
+                                   href="{{ path('category_view', {'id': categories.id}) }}">Read more &raquo;</a>
                             </div>
                             {#<div class="pull-right">#}
                                 {#<a class="btn btn-danger btn-xs" href="{{ path('article_delete', {'id':quote.id}) }}">delete &raquo;</a>#}

@@ -20,7 +20,15 @@
                         {% if quote.actors is not empty %}
                             Actors:
                             {% for actor in quote.actors%}
-                                <a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.title  }} </a>(Etymology:{{ actor.meaning }})
+                                <a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.title  }} </a>{{ actor.meaning }}
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    <p>
+                        {% if quote.categories is not empty %}
+                            Category(ies):
+                            {% for cat in quote.categories%}
+                                <br><a href="{{ path('category_view', {id: cat.id}) }}">  {{ cat.title }} </a>{{ cat.summary }}
                             {% endfor %}
                         {% endif %}
                     </p>

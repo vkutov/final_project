@@ -249,14 +249,18 @@ class ActorController extends Controller
      * @Route("/allActors", name="allActors")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function allActors()
+    public function allActors(Request $request)
     {
         $actors = $this->getDoctrine()
             ->getRepository(Actor::class)
             ->findAll();
-
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $actors, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            3/*limit per page*/
+        );
         return $this->render('actor/allActors.html.twig',
-            ['actors' => $actors]);
+            ['actors' => $actors,'pagination' => $pagination]);
     }
-
 }

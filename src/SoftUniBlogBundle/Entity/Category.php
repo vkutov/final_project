@@ -43,7 +43,7 @@ class Category
 
     /**
      * @var Actor[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Actor")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Actor",mappedBy="categories")
      * @ORM\JoinTable(name="cat_actors",
      *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")}
@@ -52,7 +52,7 @@ class Category
     private $actors;
     /**
      * @var Quote[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote", mappedBy="categories")
      * @ORM\JoinTable(name="cat_quotes",
      *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")}
@@ -86,7 +86,10 @@ class Category
      * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
     private $image;
-
+    /**
+     * @var string
+     */
+    private $summary;
 
     /**
      * Get id
@@ -249,22 +252,22 @@ class Category
      *
      * @return Category
      */
-    public function setRelatedCategories($relatedCategories)
-    {
-        $this->relatedCategories = $relatedCategories;
-
-        return $this;
-    }
-
-    /**
-     * Get relatedCategories
-     *
-     * @return array
-     */
-    public function getRelatedCategories()
-    {
-        return $this->relatedCategories;
-    }
+//    public function setRelatedCategories($relatedCategories)
+//    {
+//        $this->relatedCategories = $relatedCategories;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get relatedCategories
+//     *
+//     * @return array
+//     */
+//    public function getRelatedCategories()
+//    {
+//        return $this->relatedCategories;
+//    }
 
     /**
      * Set image
@@ -304,6 +307,23 @@ class Category
     public function setAuthor($author)
     {
         $this->author = $author;
+    }
+    /**
+     * @return string
+     */
+    public function getSummary()
+    {
+        if(strlen($this->meaning) > 50){
+            $this->setSummary();
+        }
+        return $this->summary;
+    }
+
+    public function setSummary()
+    {
+        $this->summary = substr($this->getMeaning(), 0,
+                strlen($this->getmeaning()) / 2
+            ) . "...";
     }
 }
 

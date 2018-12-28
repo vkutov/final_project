@@ -17,42 +17,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 class CategoryController extends Controller
 {
-//    public function objectToString(Category $category){
-//        $relatedCategories='';
-////        $quote_arr=explode(',',$quote->getRelatedQuotes());
-////        var_dump($quote->getRelatedQuotes());die();
-//        foreach($quote->getRelatedQuotes() as $key=>$value){
-////            var_dump($value->getId());die();
-//            $relatedQuotes.=','.$value->getId();
-//        }
-//        $relatedQuotes=substr($relatedQuotes,1);
-////        if(strlen($relatedQuotes)>1) {
-////            $related = substr($relatedActors, 1);
-////            $quote->setRelatedQuotes($relatedQuotes);
-////        }
-//        return $relatedQuotes;
-//
-//    }
-//    public function stringToObject(Quote $quote){
-//        $relation=$quote->getRelatedQuotes();
-//        $relation=explode(",",$relation);
-//        $related=[];
-//        foreach($relation as $value){
-//            $sql = $this
-//                ->getDoctrine()
-//                ->getRepository(Quote::class)
-//                ->find($value);
-//            $related[]=$sql;
-//        }
-//        $related['count']=count($relation);
-//        return $related;
-//    }
-    /**
-     * QuoteController constructor.
-     */
-//    public function __construct(QuoteServices $quote)
-//    {
-//    }
+
     /**
      * @Route("/category/add", name="add_category")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
@@ -64,9 +29,10 @@ class CategoryController extends Controller
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
-//        var_dump($form->getData()->getImage());die();
+//        var_dump($form->getData());die();
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->getData()->getImage();
+//            var_dump($form->getData()->getActors());die("create");
             if(!is_null($file)) {
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
                 try {
@@ -95,6 +61,7 @@ class CategoryController extends Controller
 //            $category->setRelatedQuotes($this->objectToString($category));
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
+//            var_dump($em);die();
             $em->flush();
             return $this->redirectToRoute("blog_index");
         }
@@ -243,7 +210,7 @@ class CategoryController extends Controller
             $em->flush();
             return $this->redirectToRoute("blog_index");
         }
-        return $this->render('bible/delete.html.twig',
+        return $this->render('category/delete.html.twig',
             ['form' => $form->createView(),
                 'category' => $category]);
     }

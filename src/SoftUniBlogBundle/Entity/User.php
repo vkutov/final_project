@@ -54,11 +54,24 @@ class User implements UserInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="SoftUniBlogBundle\Entity\Quote", mappedBy="publisher")
+     * @ORM\OneToMany(targetEntity="SoftUniBlogBundle\Entity\Quote", mappedBy="author")
      *
      */
-//    private $quotes;
-
+    private $quotes;
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="SoftUniBlogBundle\Entity\Actor", mappedBy="author")
+     *
+     */
+    private $actors;
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="SoftUniBlogBundle\Entity\Category", mappedBy="author")
+     *
+     */
+    private $categories;
     /**
      * @var ArrayCollection
      *
@@ -283,6 +296,54 @@ class User implements UserInterface
     {
         $this->comments[] = $comment;
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getActors()
+    {
+        return $this->actors;
+    }
+
+    /**
+     * @param ArrayCollection $actors
+     */
+    public function setActors($actors)
+    {
+        $this->actors = $actors;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getQuotes()
+    {
+        return $this->quotes;
+    }
+
+    /**
+     * @param ArrayCollection $quotes
+     */
+    public function setQuotes($quotes)
+    {
+        $this->quotes = $quotes;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param ArrayCollection $categories
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
     }
 }
 

@@ -2,7 +2,7 @@
 //php bin/console doctrine:schema:update --force
 namespace SoftUniBlogBundle\Form;
 use SoftUniBlogBundle\Entity\Actor;
-use SoftUniBlogBundle\Entity\Article;
+use SoftUniBlogBundle\Entity\Category;
 use SoftUniBlogBundle\Entity\Quote;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -30,6 +30,13 @@ class ActorType extends AbstractType
                 'required'   => false,
                 'class' => Quote::class,
                 'choice_label' => 'verse',
+                'placeholder' => '',
+                'multiple' => true
+            ])
+            ->add('categories',EntityType::class,[
+                'required'   => false,
+                'class' => Category::class,
+                'choice_label' => 'title',
                 'placeholder' => '',
                 'multiple' => true
             ])

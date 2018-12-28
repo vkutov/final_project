@@ -19,7 +19,15 @@
                         {% if actor.quotes is not empty %}
                             Quote(s):
                             {% for quote in actor.quotes%}
-                                <br><a href="{{ path('quote_view', {id: quote.id}) }}">  {{ quote.verse }} </a>(Description:{{ quote.summary }})
+                                <br><a href="{{ path('quote_view', {id: quote.id}) }}">  {{ quote.verse }} </a>{{  quote.summary }}
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    <p>
+                        {% if actor.categories is not empty %}
+                            Category(ies):
+                            {% for cat in actor.categories%}
+                                <br><a href="{{ path('category_view', {id: cat.id}) }}">  {{ cat.title }} </a>{{ cat.summary }}
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -34,7 +42,7 @@
                     {% if(actor.image) %}
                         <img src="{{ asset('uploads/images/' ~ actor.image) }}" width="400" height="200" >
                     {% endif %}
-                    {% if app.getUser().getId==actor.author or app.getUser().isAdmin() %}
+                    {% if app.getUser().getId==actor.id or app.getUser().isAdmin() %}
 
                     <p>
                         <div class="pull-right">

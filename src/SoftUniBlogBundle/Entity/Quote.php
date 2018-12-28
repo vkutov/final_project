@@ -29,7 +29,7 @@ class Quote
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="SoftUniBlogBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="SoftUniBlogBundle\Entity\User",inversedBy="quotes")
      *
      */
     private $author;

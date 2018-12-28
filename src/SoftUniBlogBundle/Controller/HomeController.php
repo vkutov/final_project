@@ -4,8 +4,9 @@ namespace SoftUniBlogBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use SoftUniBlogBundle\Entity\Article;
-use SoftUniBlogBundle\Entity\Quote;
+use SoftUniBlogBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+//use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Category;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,19 +16,19 @@ class HomeController extends Controller
      * @Route("/", name="blog_index")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function allQuotes(Request $request)
+    public function allCtegories(Request $request)
     {
-        $quotes = $this->getDoctrine()
-            ->getRepository(Quote::class)
+        $categories = $this->getDoctrine()
+            ->getRepository(Category::class)
             ->findAll();
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $quotes, /* query NOT result */
+            $categories, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             3/*limit per page*/
         );
-        return $this->render('bible/allQuotes.html.twig',
-            ['quotes' => $quotes,'pagination' => $pagination]);
+        return $this->render('category/allCategories.html.twig',
+            ['categories' => $categories,'pagination' => $pagination]);
     }
 //    /**
 //     * @Route("/", name="blog_index")
