@@ -16,7 +16,7 @@
                         {% if symbol.actors is not empty %}
                             Actors:
                             {% for actor in symbol.actors%}
-                                <a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.title  }} </a>{{ actor.meaning }}
+                                <a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.title  }} </a>({{ actor.meaning  }})
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -31,7 +31,7 @@
                     <p>
                         {% if symbol.categories is not empty %}
                             Event(s):
-                            {% for cat in symbol.categories%}
+                            {% for event in symbol.events%}
                                 <br><a href="{{ path('event_view', {id: event.id}) }}">  {{ event.title }} </a>{{ event.summary }}
                             {% endfor %}
                         {% endif %}

@@ -69,7 +69,7 @@ class Actor
     private $events;
     /**
      * @var Symbol[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",inversedBy="actors")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",mappedBy="actors")
          * @ORM\JoinTable(name="symbols_actors",
          *     joinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")},
          *     inverseJoinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")}

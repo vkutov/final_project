@@ -84,7 +84,7 @@ class Quote
     private $events;
     /**
      * @var Symbol[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",inversedBy="quotes")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",mappedBy="quotes")
      * @ORM\JoinTable(name="symbols_quotes",
      *     joinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")}

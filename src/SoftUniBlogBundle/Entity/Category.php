@@ -53,10 +53,6 @@ class Category
     /**
      * @var Quote[]
      * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote"), mappedBy="categories"
-     * @ORM\JoinTable(name="cat_quotes",
-     *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")}
-     * )
      */
     private $quotes;
     /**
@@ -71,20 +67,13 @@ class Category
 
     /**
      * @var Symbol[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",inversedBy="categories")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",mappedBy="categories")
          * @ORM\JoinTable(name="symbols_cat",
          *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
          *     inverseJoinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")}
          * )
      */
     private $symbols;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="relatedCategories", type="array", nullable=true)
-     */
-//    private $relatedCategories;
 
     /**
      * @var string
