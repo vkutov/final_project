@@ -1,58 +1,62 @@
 <?php
-
+/**
+ * Created by PhpStorm.
+ * User: Dell
+ * Date: 12/11/2018
+ * Time: 11:16 AM
+ */
 namespace SoftUniBlogBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use SoftUniBlogBundle\Entity\Actor;
+use SoftUniBlogBundle\Entity\Event;
 use SoftUniBlogBundle\Entity\User;
-use SoftUniBlogBundle\Form\ActorType;
+use SoftUniBlogBundle\Form\EventType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
-class ActorController extends Controller
+class EventController extends Controller
 {
+    public function objectToString(Event $event){
+    $relatedEvents='';
+    foreach($event->getRelatedEvents() as $key=>$value){
 
-    public function objectToString(Actor $actor){
-        $relatedActors='';
-        foreach($actor->getRelatedActors() as $key=>$value){
-
-            $relatedActors.=','.$value->getId();
-        }
-        $relatedActors=substr($relatedActors,1);
-        return $relatedActors;
+        $relatedEvents.=','.$value->getId();
     }
-    public function stringToObject(Actor $actor){
-        $relation=$actor->getRelatedActors();
-        $relation=explode(",",$relation);
-        $related=[];
-        foreach($relation as $value){
-            $sql = $this
-                ->getDoctrine()
-                ->getRepository(Actor::class)
-                ->find($value);
-            $related[]=$sql;
-        }
-        $related['count']=count($relation);
-        return $related;
+    $relatedEvents=substr($relatedEvents,1);
+    return $relatedEvents;
+}
+    public function stringToObject(Event $event){
+    $relation=$event->getRelatedEvents();
+    $relation=explode(",",$relation);
+    $related=[];
+    foreach($relation as $value){
+        $sql = $this
+            ->getDoctrine()
+            ->getRepository(Event::class)
+            ->find($value);
+        $related[]=$sql;
     }
+    $related['count']=count($relation);
+    return $related;
+}
 
 
     /**
-     * @Route("/actor/add", name="add_actor")
+     * @Route("/event/add", name="add_event")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
     {
-        $actor = new Actor();
-        $form = $this->createForm(ActorType::class, $actor);
+        $event = new Event();
+        $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
-//        var_dump($form->getData());die();
+//        var_dump($form);die();
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->getData()->getImage();
             if(!is_null($file)) {
@@ -64,44 +68,45 @@ class ActorController extends Controller
 
                 }
 
-                $actor->setImage($fileName);
+                $event->setImage($fileName);
             }
             $currentUser = $this->getUser();
-            $actor->setAuthor($currentUser);
-            $this->objectToString($actor);
-            $actor->setRelatedActors($this->objectToString($actor));
+            $event->setAuthor($currentUser);
+            $this->objectToString($event);
+            $event->setRelatedEvents($this->objectToString($event));
             $em = $this->getDoctrine()->getManager();
-            $em->persist($actor);
+            $em->persist($event);
             $em->flush();
             return $this->redirectToRoute("blog_index");
         }
 
-        return $this->render('bible/add.html.twig',
+        return $this->render('event/add.html.twig',
             ['form' => $form->createView()]);
     }
 
     /**
-     * @Route("/actor/{id}", name="actor_view")
+     * @Route("/event/{id}", name="event_view")
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewActor($id)
+    public function viewEvent($id)
     {
-        /** @var Actor $actor*/
-        $actor = $this
-            ->getDoctrine()
-            ->getRepository(Actor::class)
-            ->find($id);
-        $related=$this->stringToObject($actor);
-        $quotes=$actor->getQuotes();
+    /** @var Event $event*/
+    $event = $this
+        ->getDoctrine()
+        ->getRepository(Event::class)
+        ->find($id);
+    $related=$this->stringToObject($event);
+    $quotes=$event->getQuotes();
+    $categories=$event->getCategories();
 //        $em = $this->getDoctrine()->getManager();
 //        $em->persist($quote);
 //        $em->flush();
-        return $this->render('actor/actor.html.twig',
-            ['actor' => $actor, 'quotes' =>$quotes,"related"=>$related]);
-    }
+    return $this->render('event/event.html.twig',
+        ['event' => $event, 'quotes' =>$quotes,"categories"=>$categories,"related"=>$related]);
+     }
     /**
-     * @Route("/actor/edit/{id}", name="actor_edit")
+     * @Route("/event/edit/{id}", name="event_edit")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param Request $request
      * @param $id
@@ -109,20 +114,19 @@ class ActorController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $actor = $this
+        $event = $this
             ->getDoctrine()
-            ->getRepository(Actor::class)
+            ->getRepository(Event::class)
             ->find($id);
-//        var_dump($quote);die();
-        if ($actor === null) {
+        if ($event === null) {
             return $this->redirectToRoute("blog_index");
         }
         /** @var User $currentUser */
 
-        $related=$this->stringToObject($actor);
-        $actor->setRelatedActors($related);
-        $form = $this->createForm(ActorType::class, $actor);
-        $fileName=$actor->getImage();
+        $related=$this->stringToObject($event);
+        $event->setRelatedEvents($related);
+        $form = $this->createForm(EventType::class, $event);
+        $fileName=$event->getImage();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $file */
@@ -137,22 +141,22 @@ class ActorController extends Controller
                 catch (FileException $ex) {
                 }
             }
-            $actor->setImage($fileName);
+            $event->setImage($fileName);
             $currentUser = $this->getUser();
-            $actor->setAuthor($currentUser);
-            $ra=$this->objectToString($actor);
-            $actor->setRelatedActors($ra);
+            $event->setAuthor($currentUser);
+            $ra=$this->objectToString($event);
+            $event->setRelatedEvents($ra);
             $em = $this->getDoctrine()->getManager();
-            $em->merge($actor);
+            $em->merge($event);
             $em->flush();
             return $this->redirectToRoute("blog_index");
-        }
-        return $this->render('bible/edit.html.twig',
-            ['form' => $form->createView(),
-                'actor' => $actor,'related'=>$related]);
     }
+    return $this->render('event/edit.html.twig',
+        ['form' => $form->createView(),
+            'event' => $event,'related'=>$related]);
+}
     /**
-     * @Route("/actor/delete/{id}", name="actor_delete")
+     * @Route("/event/delete/{id}", name="event_delete")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param Request $request
      * @param $id
@@ -160,56 +164,56 @@ class ActorController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $actor = $this
+        $event = $this
             ->getDoctrine()
-            ->getRepository(Actor::class)
+            ->getRepository(Event::class)
             ->find($id);
 
-        if ($actor === null) {
+        if ($event === null) {
             return $this->redirectToRoute("blog_index");
         }
 
         /** @var User $currentUser */
         $currentUser = $this->getUser();
 
-        if (!$currentUser->isAuthor($actor) && !$currentUser->isAdmin()) {
+        if (!$currentUser->isAuthor($event) && !$currentUser->isAdmin()) {
             return $this->redirectToRoute("blog_index");
         }
-        $related=$this->stringToObject($actor);
-        $actor->setRelatedActors($related);
-        $form = $this->createForm(ActorType::class, $actor);
+        $related=$this->stringToObject($event);
+        $event->setRelatedEvents($related);
+        $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $currentUser = $this->getUser();
-            $actor->setAuthor($currentUser);
+            $event->setAuthor($currentUser);
             $em = $this->getDoctrine()->getManager();
-            $em->remove($actor);
+            $em->remove($event);
             $em->flush();
-//            die("here");
+    //            die("here");
             return $this->redirectToRoute("blog_index");
         }
 
-        return $this->render('actor/delete.html.twig',
+        return $this->render('event/delete.html.twig',
             ['form' => $form->createView(),
-                'actor' => $actor]);
+                'event' => $event]);
     }
     /**
-     * @Route("/allActors", name="allActors")
+     * @Route("/allEvents", name="allEvents")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function allActors(Request $request)
-    {
-        $actors = $this->getDoctrine()
-            ->getRepository(Actor::class)
-            ->findAll();
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $actors, /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
-            3/*limit per page*/
-        );
-        return $this->render('actor/allActors.html.twig',
-            ['actors' => $actors,'pagination' => $pagination]);
-    }
+    public function allEvents(Request $request)
+{
+    $events = $this->getDoctrine()
+        ->getRepository(Event::class)
+        ->findAll();
+    $paginator  = $this->get('knp_paginator');
+    $pagination = $paginator->paginate(
+        $events, /* query NOT result */
+        $request->query->getInt('page', 1)/*page number*/,
+        3/*limit per page*/
+    );
+    return $this->render('event/allEvents.html.twig',
+        ['events' => $events,'pagination' => $pagination]);
+}
 }

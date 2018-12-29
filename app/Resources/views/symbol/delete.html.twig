@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" action="{{ path('symbol_delete', {id: symbol.id}) }}" method="POST">
+                <fieldset>
+                    <legend>Delete Symbol</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="symbol_verse">Symbol Vesrse</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="symbole_name" placeholder="Post Title"
+                                   name="symbol[name]" value="{{ symbol.name}}" disabled>
+                        </div>
+                    </div>
+                    {#<div class="col-sm-4 ">#}
+                        {#<input type="text" class="form-control" id="quote_related" placeholder="Post Title"#}
+                               {#name="quote[related]" value="{{ quote.relatedQuotes }}" disabled>#}
+                    {#</div>#}
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="symbol_meaning">Etymology</label>
+                        <div class="col-sm-6">
+                        <textarea class="form-control" rows="6" id="symbol_meaning"
+                                  name="symbol[meaning]" disabled>{{ symbol.meaning }}</textarea>
+                        </div>
+                    </div>
+
+                    {{ form_row(form._token) }}
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" href="{{ path('symbol_view', {id: symbol.id}) }}">Cancel</a>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+
+{% endblock %}

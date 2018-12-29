@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class QuoteType extends AbstractType
+class EventType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -25,8 +25,7 @@ class QuoteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('verse', TextareaType::class)
-            ->add('place', TextType::class)
+            ->add('title', TextareaType::class)
             ->add('meaning', TextareaType::class)
 
 //            ->add('actors', ChoiceType::class, [
@@ -44,10 +43,10 @@ class QuoteType extends AbstractType
                 'placeholder' => '',
                 'multiple' => true
             ])
-            ->add('events',EntityType::class,[
+            ->add('quotes',EntityType::class,[
                 'required'   => false,
-                'class' => Event::class,
-                'choice_label' => 'title',
+                'class' => Quote::class,
+                'choice_label' => 'verse',
                 'placeholder' => '',
                 'multiple' => true
             ])
@@ -65,17 +64,17 @@ class QuoteType extends AbstractType
                 'placeholder' => '',
                 'multiple' => true
             ])
-            ->add('relatedQuotes',EntityType::class,[
+            ->add('relatedEvents',EntityType::class,[
                 'required'   => false,
-                'class' => Quote::class,
-                'choice_label' => 'verse',
+                'class' => Event::class,
+                'choice_label' => 'title',
                 'placeholder' => '',
                 'multiple' => true
             ])
             ->add('image', FileType::class,
                 ['required'   => false,
-                'data' => null])
-        ->add('save',SubmitType::class);
+                    'data' => null])
+            ->add('save',SubmitType::class);
     }
     /**
      * {@inheritdoc}
@@ -83,7 +82,7 @@ class QuoteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'SoftUniBlogBundle\Entity\Quote'
+            'data_class' => 'SoftUniBlogBundle\Entity\Event'
         ));
     }
 }

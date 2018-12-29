@@ -37,7 +37,7 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="meaning", type="string", length=255, nullable=true)
+     * @ORM\Column(name="meaning", type="string", length=255, nullable=false)
      */
     private $meaning;
 
@@ -52,7 +52,7 @@ class Category
     private $actors;
     /**
      * @var Quote[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote", mappedBy="categories")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote"), mappedBy="categories"
      * @ORM\JoinTable(name="cat_quotes",
      *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")}
@@ -60,16 +60,22 @@ class Category
      */
     private $quotes;
     /**
-     * @var array
-     *
-     * @ORM\Column(name="events", type="array", nullable=true)
+     * @var Event[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event", mappedBy="categories")
+     * @ORM\JoinTable(name="cat_events",
+     *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")}
+     * )
      */
     private $events;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(name="symbols", type="array", nullable=true)
+     * @var Symbol[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",inversedBy="categories")
+         * @ORM\JoinTable(name="symbols_cat",
+         *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
+         *     inverseJoinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")}
+         * )
      */
     private $symbols;
 

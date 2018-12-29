@@ -4,32 +4,32 @@
 
     <div class="container body-content">
         <div class="row">
-            {% for actor in pagination %}
+            {% for symbol in pagination %}
                 <div class="col-md-12">
                     <article>
                         <header>
-                            <h2>" {{ actor.title }}"</h2>
+                            <h2>" {{ symbol.name }}"</h2>
                         </header>
                         <p>
-                            {% if(actor.summary) %}
-                                {{ actor.summary }}
+                            {% if(symbol.summary) %}
+                                {{ symbol.summary }}
                             {%else %}
-                                {{ actor.meaning }}
+                                {{ symbol.meaning }}
                             {% endif %}
                         </p>
-                        {% if(actor.image) %}
-                            <img src="{{ asset('uploads/images/' ~ actor.image) }}" width="400" height="200" >
+                        {% if(symbol.image) %}
+                        <img src="{{ asset('uploads/images/' ~ symbol.image) }}" width="400" height="200" >
                         {% endif %}
                         <footer>
                             <div class="pull-right">
                                 <a class="btn btn-default btn-xs"
-                                   href="{{ path('actor_view', {'id': actor.id}) }}">Read more &raquo;</a>
+                                   href="{{ path('symbol_view', {'id': symbol.id}) }}">Read more &raquo;</a>
                             </div>
                             {#<div class="pull-right">#}
-                            {#<a class="btn btn-danger btn-xs" href="{{ path('article_delete', {'id':quote.id}) }}">delete &raquo;</a>#}
-                            {#<a class="btn btn-success btn-xs" href="{{ path('article_edit', {'id':quote.id}) }}">edit &raquo;</a>#}
-                            {#<a class="btn btn-default btn-xs"#}
-                            {#href="{{ path('blog_index') }}">back &raquo;</a>#}
+                                {#<a class="btn btn-danger btn-xs" href="{{ path('article_delete', {'id':quote.id}) }}">delete &raquo;</a>#}
+                                {#<a class="btn btn-success btn-xs" href="{{ path('article_edit', {'id':quote.id}) }}">edit &raquo;</a>#}
+                                {#<a class="btn btn-default btn-xs"#}
+                                   {#href="{{ path('blog_index') }}">back &raquo;</a>#}
                             {#</div>#}
                         </footer>
                     </article>

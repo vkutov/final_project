@@ -2,7 +2,6 @@
 
 namespace SoftUniBlogBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,7 +37,7 @@ class Actor
     /**
      * @var string
      *
-     * @ORM\Column(name="meaning", type="string", length=255, nullable=true)
+     * @ORM\Column(name="meaning", type="string", length=255, nullable=false)
      */
     private $meaning;
     /**
@@ -60,11 +59,23 @@ class Actor
      */
     private $categories;
     /**
-     * @var ArrayCollection|Quote[]
-     *
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event", mappedBy="author")
+     * @var Event[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event",mappedBy="actors")
+     * @ORM\JoinTable(name="events_actors",
+     *     joinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")}
+     * )
      */
     private $events;
+    /**
+     * @var Symbol[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",inversedBy="actors")
+         * @ORM\JoinTable(name="symbols_actors",
+         *     joinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")},
+         *     inverseJoinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")}
+         * )
+     */
+    private $symbols;
     /**
      * @var string
      * @ORM\Column(name="relatedActors")
@@ -276,6 +287,22 @@ class Actor
         $this->summary = substr($this->getMeaning(), 0,
                 strlen($this->getmeaning()) / 2
             ) . "...";
+    }
+
+    /**
+     * @return Symbol[]
+     */
+    public function getSymbols()
+    {
+        return $this->symbols;
+    }
+
+    /**
+     * @param Symbol[] $symbols
+     */
+    public function setSymbols($symbols)
+    {
+        $this->symbols = $symbols;
     }
 
 }

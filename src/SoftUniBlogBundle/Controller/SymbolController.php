@@ -1,107 +1,101 @@
 <?php
-
 namespace SoftUniBlogBundle\Controller;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use SoftUniBlogBundle\Entity\Actor;
+//use SoftUniBlogBundle\Entity\Actor;
+//use SoftUniBlogBundle\Entity\Article;
+//use SoftUniBlogBundle\Entity\Comment;
+use SoftUniBlogBundle\Entity\Symbol;
+use SoftUniBlogBundle\Service\QuoteServices;
 use SoftUniBlogBundle\Entity\User;
-use SoftUniBlogBundle\Form\ActorType;
+use SoftUniBlogBundle\Form\ArticleType;
+use SoftUniBlogBundle\Form\SymbolType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
-
-class ActorController extends Controller
+class SymbolController extends Controller
 {
-
-    public function objectToString(Actor $actor){
-        $relatedActors='';
-        foreach($actor->getRelatedActors() as $key=>$value){
-
-            $relatedActors.=','.$value->getId();
+    public function objectToString(Symbol $symbol){
+        $relatedSymbols='';
+        foreach($symbol->getRelatedSymbols() as $key=>$value){
+            $relatedSymbols.=','.$value->getId();
         }
-        $relatedActors=substr($relatedActors,1);
-        return $relatedActors;
+        $relatedSymbols=substr($relatedSymbols,1);
+        return $relatedSymbols;
     }
-    public function stringToObject(Actor $actor){
-        $relation=$actor->getRelatedActors();
+    public function stringToObject(Symbol $symbol){
+        $relation=$symbol->getRelatedSymbols();
         $relation=explode(",",$relation);
         $related=[];
         foreach($relation as $value){
             $sql = $this
                 ->getDoctrine()
-                ->getRepository(Actor::class)
+                ->getRepository(Symbol::class)
                 ->find($value);
             $related[]=$sql;
         }
         $related['count']=count($relation);
         return $related;
     }
-
-
     /**
-     * @Route("/actor/add", name="add_actor")
+     * @Route("/symbol/add", name="add_symbol")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
     {
-        $actor = new Actor();
-        $form = $this->createForm(ActorType::class, $actor);
+        $symbol = new Symbol();
+        $form = $this->createForm(SymbolType::class, $symbol);
         $form->handleRequest($request);
-//        var_dump($form->getData());die();
+//        var_dump($form->getData()->getImage());die();
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->getData()->getImage();
+//            var_dump($form->getData()->getActors());die("create");
             if(!is_null($file)) {
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
                 try {
                     $file->move($this->getParameter('image_directory'),
                         $fileName);
                 } catch (FileException $ex) {
-
                 }
-
-                $actor->setImage($fileName);
+                $symbol->setImage($fileName);
             }
             $currentUser = $this->getUser();
-            $actor->setAuthor($currentUser);
-            $this->objectToString($actor);
-            $actor->setRelatedActors($this->objectToString($actor));
+            $symbol->setAuthor($currentUser);
+            $symbol->setRelatedSymbols($this->objectToString($symbol));
             $em = $this->getDoctrine()->getManager();
-            $em->persist($actor);
+            $em->persist($symbol);
             $em->flush();
             return $this->redirectToRoute("blog_index");
         }
-
-        return $this->render('bible/add.html.twig',
+        return $this->render('symbol/add.html.twig',
             ['form' => $form->createView()]);
     }
-
     /**
-     * @Route("/actor/{id}", name="actor_view")
+     * @Route("/symbol/{id}", name="symbol_view")
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewActor($id)
+    public function viewSymbol($id)
     {
-        /** @var Actor $actor*/
-        $actor = $this
+        /** @var Symbol $symbol*/
+        $symbol = $this
             ->getDoctrine()
-            ->getRepository(Actor::class)
+            ->getRepository(Symbol::class)
             ->find($id);
-        $related=$this->stringToObject($actor);
-        $quotes=$actor->getQuotes();
+        $related=$this->stringToObject($symbol);
+        $actors=$symbol->getActors();
 //        $em = $this->getDoctrine()->getManager();
 //        $em->persist($quote);
 //        $em->flush();
-        return $this->render('actor/actor.html.twig',
-            ['actor' => $actor, 'quotes' =>$quotes,"related"=>$related]);
+        return $this->render('symbol/symbol.html.twig',
+            ['symbol' => $symbol, 'actors' =>$actors,"related"=>$related]);
     }
     /**
-     * @Route("/actor/edit/{id}", name="actor_edit")
+     * @Route("/symbol/edit/{id}", name="symbol_edit")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param Request $request
      * @param $id
@@ -109,27 +103,29 @@ class ActorController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $actor = $this
+        $symbol = $this
             ->getDoctrine()
-            ->getRepository(Actor::class)
+            ->getRepository(Symbol::class)
             ->find($id);
-//        var_dump($quote);die();
-        if ($actor === null) {
+        if ($symbol === null) {
             return $this->redirectToRoute("blog_index");
         }
         /** @var User $currentUser */
-
-        $related=$this->stringToObject($actor);
-        $actor->setRelatedActors($related);
-        $form = $this->createForm(ActorType::class, $actor);
-        $fileName=$actor->getImage();
+        $currentUser = $this->getUser();
+        if (!$currentUser->isAuthor($symbol) && !$currentUser->isAdmin()) {
+            return $this->redirectToRoute("blog_index");
+        }
+        $related=$this->stringToObject($symbol);
+        $symbol->setRelatedSymbols($related);
+//        var_dump($quote->getRelatedQuotes());die();
+        $form = $this->createForm(SymbolType::class, $symbol);
+        $fileName=$symbol->getImage();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $file */
             $file = $form->getData()->getImage();
             if(!is_null($file)){
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-
                 try {
                     $file->move($this->getParameter('image_directory'),
                         $fileName);
@@ -137,22 +133,23 @@ class ActorController extends Controller
                 catch (FileException $ex) {
                 }
             }
-            $actor->setImage($fileName);
+            $symbol->setImage($fileName);
             $currentUser = $this->getUser();
-            $actor->setAuthor($currentUser);
-            $ra=$this->objectToString($actor);
-            $actor->setRelatedActors($ra);
+            $symbol->setAuthor($currentUser);
+            $rs=$this->objectToString($symbol);
+//            var_dump($form->getData()->getActors());die();
+            $symbol->setRelatedSymbols($rs);
             $em = $this->getDoctrine()->getManager();
-            $em->merge($actor);
+            $em->merge($symbol);
             $em->flush();
             return $this->redirectToRoute("blog_index");
         }
-        return $this->render('bible/edit.html.twig',
+        return $this->render('symbol/edit.html.twig',
             ['form' => $form->createView(),
-                'actor' => $actor,'related'=>$related]);
+                'symbol' => $symbol,'related'=>$related]);
     }
     /**
-     * @Route("/actor/delete/{id}", name="actor_delete")
+     * @Route("/symbol/delete/{id}", name="symbol_delete")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param Request $request
      * @param $id
@@ -160,56 +157,53 @@ class ActorController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $actor = $this
+        $symbol = $this
             ->getDoctrine()
-            ->getRepository(Actor::class)
+            ->getRepository(Symbol::class)
             ->find($id);
-
-        if ($actor === null) {
+        if ($symbol === null) {
             return $this->redirectToRoute("blog_index");
         }
-
         /** @var User $currentUser */
         $currentUser = $this->getUser();
-
-        if (!$currentUser->isAuthor($actor) && !$currentUser->isAdmin()) {
+        if (!$currentUser->isAuthor($symbol) && !$currentUser->isAdmin()) {
             return $this->redirectToRoute("blog_index");
         }
-        $related=$this->stringToObject($actor);
-        $actor->setRelatedActors($related);
-        $form = $this->createForm(ActorType::class, $actor);
+//        var_dump($quote->getRelatedQuotes());die();
+        $related=$this->stringToObject($symbol);
+        $symbol->setRelatedSymbols($related);
+//        var_dump($quote->getRelatedQuotes());die();
+        $form = $this->createForm(SymbolType::class, $symbol);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $currentUser = $this->getUser();
-            $actor->setAuthor($currentUser);
+            $symbol->setAuthor($currentUser);
             $em = $this->getDoctrine()->getManager();
-            $em->remove($actor);
+            $em->remove($symbol);
             $em->flush();
-//            die("here");
             return $this->redirectToRoute("blog_index");
         }
-
-        return $this->render('actor/delete.html.twig',
+        return $this->render('symbol/delete.html.twig',
             ['form' => $form->createView(),
-                'actor' => $actor]);
+                'symbol' => $symbol]);
     }
     /**
-     * @Route("/allActors", name="allActors")
+     * @Route("/allSymbols", name="allSymbols")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function allActors(Request $request)
+
+    public function allSymbols(Request $request)
     {
-        $actors = $this->getDoctrine()
-            ->getRepository(Actor::class)
+        $symbols = $this->getDoctrine()
+            ->getRepository(Symbol::class)
             ->findAll();
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $actors, /* query NOT result */
+            $symbols, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             3/*limit per page*/
         );
-        return $this->render('actor/allActors.html.twig',
-            ['actors' => $actors,'pagination' => $pagination]);
+        return $this->render('symbol/allSymbols.html.twig',
+            ['symbols' => $symbols,'pagination' => $pagination]);
     }
 }

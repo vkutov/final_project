@@ -7,9 +7,9 @@ use SoftUniBlogBundle\Entity\Category;
 use SoftUniBlogBundle\Entity\Event;
 use SoftUniBlogBundle\Entity\Quote;
 use SoftUniBlogBundle\Entity\Symbol;
+//use SoftUniBlogBundle\Entity\Symbol;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class QuoteType extends AbstractType
+class SymbolType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -25,8 +25,7 @@ class QuoteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('verse', TextareaType::class)
-            ->add('place', TextType::class)
+            ->add('name', TextareaType::class)
             ->add('meaning', TextareaType::class)
 
 //            ->add('actors', ChoiceType::class, [
@@ -35,6 +34,13 @@ class QuoteType extends AbstractType
 //                    'title' => 'title'
 //                ]
 //            ])
+            ->add('quotes',EntityType::class,[
+                'required'   => false,
+                'class' => Quote::class,
+                'choice_label' => 'verse',
+                'placeholder' => '',
+                'multiple' => true
+            ])
             ->add('actors',EntityType::class,[
                 'required'   => false,
                 'class' => Actor::class,
@@ -58,24 +64,17 @@ class QuoteType extends AbstractType
                 'placeholder' => '',
                 'multiple' => true
             ])
-            ->add('symbols',EntityType::class,[
+            ->add('relatedSymbols',EntityType::class,[
                 'required'   => false,
                 'class' => Symbol::class,
                 'choice_label' => 'name',
                 'placeholder' => '',
                 'multiple' => true
             ])
-            ->add('relatedQuotes',EntityType::class,[
-                'required'   => false,
-                'class' => Quote::class,
-                'choice_label' => 'verse',
-                'placeholder' => '',
-                'multiple' => true
-            ])
             ->add('image', FileType::class,
                 ['required'   => false,
-                'data' => null])
-        ->add('save',SubmitType::class);
+                    'data' => null])
+            ->add('save',SubmitType::class);
     }
     /**
      * {@inheritdoc}
@@ -83,7 +82,7 @@ class QuoteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'SoftUniBlogBundle\Entity\Quote'
+            'data_class' => 'SoftUniBlogBundle\Entity\Symbol'
         ));
     }
 }

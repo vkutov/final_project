@@ -52,7 +52,7 @@ class Quote
 
     /**
      * @var string
-     * @ORM\Column(name="meaning")
+     * @ORM\Column(name="meaning",nullable=false)
      */
     private $meaning;
     /**
@@ -73,6 +73,24 @@ class Quote
      * )
      */
     private $categories;
+    /**
+     * @var Event[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event",mappedBy="quotes")
+     * @ORM\JoinTable(name="events_quotes",
+     *     joinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")}
+     * )
+     */
+    private $events;
+    /**
+     * @var Symbol[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",inversedBy="quotes")
+     * @ORM\JoinTable(name="symbols_quotes",
+     *     joinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")}
+     * )
+     */
+    private $symbols;
     /**
      * @var string
      * @ORM\Column(name="relatedQuotes")
@@ -240,5 +258,37 @@ class Quote
     public function setCategories($categories)
     {
         $this->categories = $categories;
+    }
+
+    /**
+     * @return Event[]
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * @param Event[] $events
+     */
+    public function setEvents($events)
+    {
+        $this->events = $events;
+    }
+
+    /**
+     * @return Event[]
+     */
+    public function getSymbols()
+    {
+        return $this->symbols;
+    }
+
+    /**
+     * @param Event[] $symbols
+     */
+    public function setSymbols($symbols)
+    {
+        $this->symbols = $symbols;
     }
 }

@@ -5,10 +5,10 @@ namespace SoftUniBlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Symbol
+ * Actor
  *
  * @ORM\Table(name="symbols")
- * @ORM\Entity(repositoryClass="SoftUniBlogBundle\Repository\SymbolRepository")
+ * @ORM\Entity(repositoryClass="SoftUniBlogBundle\Repository\ActorRepository")
  */
 class Symbol
 {
@@ -20,63 +20,77 @@ class Symbol
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
-     * @var string
+     * @var User
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="SoftUniBlogBundle\Entity\User" ,inversedBy="actors")
+     *
      */
-    private $title;
+    private $author;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=50)
+     */
+    private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="meaning", type="string", length=100, nullable=true)
+     * @ORM\Column(name="meaning", type="string", length=255, nullable=false)
      */
     private $meaning;
-
     /**
-     * @var array
-     *
-     * @ORM\Column(name="quotes", type="array")
+     * @var Quote[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote",mappedBy="symbols")
+     * @ORM\JoinTable(name="symbols_quotes",
+     *     joinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")}
+     * )
      */
     private $quotes;
-
     /**
-     * @var array
-     *
-     * @ORM\Column(name="events", type="array", nullable=true)
-     */
-    private $events;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="actors", type="array", nullable=true)
+     * @var Actor[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Actor",mappedBy="symbols")
+     * @ORM\JoinTable(name="symbols_actors",
+     *     joinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")}
+     * )
      */
     private $actors;
-
     /**
-     * @var array
-     *
-     * @ORM\Column(name="categories", type="array", nullable=true)
+     * @var Category[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Category",mappedBy="symbols")
+     * @ORM\JoinTable(name="symbols_cat",
+     *     joinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")}
+     * )
      */
     private $categories;
-
     /**
-     * @var array
-     *
-     * @ORM\Column(name="relatedSymbols", type="array", nullable=true)
+     * @var Event[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event",mappedBy="symbols")
+     * @ORM\JoinTable(name="symbols_events",
+     *     joinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")}
+     * )
+     */
+    private $events;
+    /**
+     * @var string
+     * @ORM\Column(name="relatedActors")
      */
     private $relatedSymbols;
-
+    /**
+     * @var string
+     */
+    private $summary;
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @ORM\Column(name="image", type="string", nullable=true)
      */
     private $image;
-
 
     /**
      * Get id
@@ -91,13 +105,13 @@ class Symbol
     /**
      * Set title
      *
-     * @param string $title
+     * @param string $name
      *
-     * @return Symbol
+     * @return Actor
      */
-    public function setTitle($title)
+    public function setName($name)
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
@@ -107,9 +121,9 @@ class Symbol
      *
      * @return string
      */
-    public function getTitle()
+    public function getName()
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**
@@ -117,7 +131,7 @@ class Symbol
      *
      * @param string $meaning
      *
-     * @return Symbol
+     * @return Actor
      */
     public function setMeaning($meaning)
     {
@@ -137,11 +151,11 @@ class Symbol
     }
 
     /**
-     * Set quotes
+     * Set strifes
      *
      * @param array $quotes
      *
-     * @return Symbol
+     * @return Actor
      */
     public function setQuotes($quotes)
     {
@@ -151,7 +165,7 @@ class Symbol
     }
 
     /**
-     * Get quotes
+     * Get strifes
      *
      * @return array
      */
@@ -161,11 +175,11 @@ class Symbol
     }
 
     /**
-     * Set events
+     * Set holidays
      *
      * @param array $events
      *
-     * @return Symbol
+     * @return Actor
      */
     public function setEvents($events)
     {
@@ -175,7 +189,7 @@ class Symbol
     }
 
     /**
-     * Get events
+     * Get holidays
      *
      * @return array
      */
@@ -185,35 +199,11 @@ class Symbol
     }
 
     /**
-     * Set actors
-     *
-     * @param array $actors
-     *
-     * @return Symbol
-     */
-    public function setActors($actors)
-    {
-        $this->actors = $actors;
-
-        return $this;
-    }
-
-    /**
-     * Get actors
-     *
-     * @return array
-     */
-    public function getActors()
-    {
-        return $this->actors;
-    }
-
-    /**
      * Set categories
      *
      * @param array $categories
      *
-     * @return Symbol
+     * @return Actor
      */
     public function setCategories($categories)
     {
@@ -233,11 +223,7 @@ class Symbol
     }
 
     /**
-     * Set relatedSymbols
-     *
-     * @param array $relatedSymbols
-     *
-     * @return Symbol
+     * @param string $relatedSymbols
      */
     public function setRelatedSymbols($relatedSymbols)
     {
@@ -247,9 +233,7 @@ class Symbol
     }
 
     /**
-     * Get relatedSymbols
-     *
-     * @return array
+     * @return string
      */
     public function getRelatedSymbols()
     {
@@ -257,27 +241,69 @@ class Symbol
     }
 
     /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return Symbol
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
      * @return string
      */
     public function getImage()
     {
         return $this->image;
     }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+    /**
+     * @return string
+     */
+    public function getSummary()
+    {
+        if(strlen($this->meaning) > 50){
+            $this->setSummary();
+        }
+        return $this->summary;
+    }
+
+    public function setSummary()
+    {
+        $this->summary = substr($this->getMeaning(), 0,
+                strlen($this->getmeaning()) / 2
+            ) . "...";
+    }
+
+    /**
+     * @return Quote[]
+     */
+    public function getActors()
+    {
+        return $this->actors;
+    }
+
+    /**
+     * @param Quote[] $actors
+     */
+    public function setActors($actors)
+    {
+        $this->actors = $actors;
+    }
+
 }
 

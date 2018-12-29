@@ -1,33 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-
+    <h1>Events To Avoid</h1>
+    <h4>"Take no part in the unfruitful works of darkness, but instead expose them."(Ephesians 5:11)</h4>
     <div class="container body-content">
         <div class="row">
-            {% for quote in pagination %}
+            {% for event in pagination %}
                 <div class="col-md-12">
                     <article>
                         <header>
-                            <h2>" {{ quote.verse }}"</h2>
+                            <h2>" {{ event.title }}"</h2>
                         </header>
 
                         <p>
-                             {{ quote.place }}
-                        </p>
-                        <p>
-                            {% if(quote.summary) %}
-                                {{ quote.summary }}
+                            {% if(event.summary) %}
+                                {{ event.summary }}
                             {%else %}
-                                {{ quote.meaning }}
+                                {{ event.meaning }}
                             {% endif %}
-                        </p>
-                        {% if(quote.image) %}
-                        <img src="{{ asset('uploads/images/' ~ quote.image) }}" width="400" height="200" >
+                         </p>
+                        {% if(event.image) %}
+                        <img src="{{ asset('uploads/images/' ~ event.image) }}" width="400" height="200" >
                         {% endif %}
                         <footer>
                             <div class="pull-right">
                                 <a class="btn btn-default btn-xs"
-                                   href="{{ path('quote_view', {'id': quote.id}) }}">Read more &raquo;</a>
+                                   href="{{ path('event_view', {'id': event.id}) }}">Read more &raquo;</a>
                             </div>
                             {#<div class="pull-right">#}
                                 {#<a class="btn btn-danger btn-xs" href="{{ path('article_delete', {'id':quote.id}) }}">delete &raquo;</a>#}

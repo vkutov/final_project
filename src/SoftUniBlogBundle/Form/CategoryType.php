@@ -4,7 +4,9 @@ namespace SoftUniBlogBundle\Form;
 
 use SoftUniBlogBundle\Entity\Actor;
 use SoftUniBlogBundle\Entity\Category;
+use SoftUniBlogBundle\Entity\Event;
 use SoftUniBlogBundle\Entity\Quote;
+use SoftUniBlogBundle\Entity\Symbol;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -47,6 +49,20 @@ class CategoryType extends AbstractType
                 'choice_label' => function(Actor $actor){
                     return $actor->getTitle().' ('.$actor->getMeaning().')';
                 },
+                'placeholder' => '',
+                'multiple' => true
+            ])
+            ->add('events',EntityType::class,[
+                'required'   => false,
+                'class' => Event::class,
+                'choice_label' => 'title',
+                'placeholder' => '',
+                'multiple' => true
+            ])
+            ->add('symbols',EntityType::class,[
+                'required'   => false,
+                'class' => Symbol::class,
+                'choice_label' => 'name',
                 'placeholder' => '',
                 'multiple' => true
             ])

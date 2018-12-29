@@ -3,6 +3,7 @@
 namespace SoftUniBlogBundle\Form;
 use SoftUniBlogBundle\Entity\Actor;
 use SoftUniBlogBundle\Entity\Category;
+use SoftUniBlogBundle\Entity\Event;
 use SoftUniBlogBundle\Entity\Quote;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -36,6 +37,13 @@ class ActorType extends AbstractType
             ->add('categories',EntityType::class,[
                 'required'   => false,
                 'class' => Category::class,
+                'choice_label' => 'title',
+                'placeholder' => '',
+                'multiple' => true
+            ])
+            ->add('events',EntityType::class,[
+                'required'   => false,
+                'class' => Event::class,
                 'choice_label' => 'title',
                 'placeholder' => '',
                 'multiple' => true

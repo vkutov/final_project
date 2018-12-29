@@ -5,23 +5,27 @@
     <h4>"Take no part in the unfruitful works of darkness, but instead expose them."(Ephesians 5:11)</h4>
     <div class="container body-content">
         <div class="row">
-            {% for categories in pagination %}
+            {% for category in pagination %}
                 <div class="col-md-12">
                     <article>
                         <header>
-                            <h2>" {{ categories.title }}"</h2>
+                            <h2>" {{ category.title }}"</h2>
                         </header>
 
                         <p>
-                            {{ categories.summary }}
+                            {% if(category.summary) %}
+                                {{ category.summary }}
+                            {%else %}
+                                {{ category.meaning }}
+                            {% endif %}
                         </p>
-                        {% if(categories.image) %}
-                        <img src="{{ asset('uploads/images/' ~ categories.image) }}" width="400" height="200" >
+                        {% if(category.image) %}
+                        <img src="{{ asset('uploads/images/' ~ category.image) }}" width="400" height="200" >
                         {% endif %}
                         <footer>
                             <div class="pull-right">
                                 <a class="btn btn-default btn-xs"
-                                   href="{{ path('category_view', {'id': categories.id}) }}">Read more &raquo;</a>
+                                   href="{{ path('category_view', {'id': category.id}) }}">Read more &raquo;</a>
                             </div>
                             {#<div class="pull-right">#}
                                 {#<a class="btn btn-danger btn-xs" href="{{ path('article_delete', {'id':quote.id}) }}">delete &raquo;</a>#}
