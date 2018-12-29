@@ -19,7 +19,7 @@
                         {% if actor.quotes is not empty %}
                             Quote(s):
                             {% for quote in actor.quotes%}
-                                <br><a href="{{ path('quote_view', {id: quote.id}) }}">  {{ quote.verse }} </a>{{  quote.summary }}
+                                <br><a href="{{ path('quote_view', {id: quote.id}) }}">  {{ quote.verse }} </a>({{  quote.summary }})
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -46,7 +46,7 @@
 
                     <p>
                         <div class="pull-right">
-                            <a class="btn btn-danger btn-xs" href="{{ path('actor_delete', {'id':actor.id}) }}">delete &raquo;</a>
+                            {#<a class="btn btn-danger btn-xs" href="{{ path('actor_delete', {'id':actor.id}) }}">delete &raquo;</a>#}
                             <a class="btn btn-success btn-xs" href="{{ path('actor_edit', {'id':actor.id}) }}">edit &raquo;</a>
                             {% endif %}
                     <p>

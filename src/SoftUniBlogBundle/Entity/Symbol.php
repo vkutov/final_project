@@ -107,7 +107,7 @@ class Symbol
      *
      * @param string $name
      *
-     * @return Actor
+     * @return Symbol
      */
     public function setName($name)
     {
@@ -131,7 +131,7 @@ class Symbol
      *
      * @param string $meaning
      *
-     * @return Actor
+     * @return Symbol
      */
     public function setMeaning($meaning)
     {
@@ -155,7 +155,7 @@ class Symbol
      *
      * @param array $quotes
      *
-     * @return Actor
+     * @return Symbol
      */
     public function setQuotes($quotes)
     {
@@ -179,7 +179,7 @@ class Symbol
      *
      * @param array $events
      *
-     * @return Actor
+     * @return Symbol
      */
     public function setEvents($events)
     {
@@ -203,7 +203,7 @@ class Symbol
      *
      * @param array $categories
      *
-     * @return Actor
+     * @return Symbol
      */
     public function setCategories($categories)
     {
@@ -276,22 +276,21 @@ class Symbol
      */
     public function getSummary()
     {
-        if(strlen($this->meaning) > 50){
-            $this->setSummary();
-        }
+        $this->setSummary();
         return $this->summary;
     }
 
     public function setSummary()
     {
-        $this->summary = substr($this->getMeaning(), 0,
-                strlen($this->getmeaning()) / 2
-            ) . "...";
+        if(strlen($this->getMeaning())>50){
+            $this->summary = substr($this->getMeaning(), 0,
+                    strlen($this->getmeaning()) / 2
+                ) . "...";
+        }
+        else {
+            $this->summary = $this->getMeaning();
+        }
     }
-
-    /**
-     * @return Quote[]
-     */
     public function getActors()
     {
         return $this->actors;

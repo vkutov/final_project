@@ -53,6 +53,10 @@ class Category
     /**
      * @var Quote[]
      * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote"), mappedBy="categories"
+     * @ORM\JoinTable(name="cat_quotes",
+     *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")}
+     * )
      */
     private $quotes;
     /**
@@ -241,30 +245,6 @@ class Category
     }
 
     /**
-     * Set relatedCategories
-     *
-     * @param array $relatedCategories
-     *
-     * @return Category
-     */
-//    public function setRelatedCategories($relatedCategories)
-//    {
-//        $this->relatedCategories = $relatedCategories;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get relatedCategories
-//     *
-//     * @return array
-//     */
-//    public function getRelatedCategories()
-//    {
-//        return $this->relatedCategories;
-//    }
-
-    /**
      * Set image
      *
      * @param string $image
@@ -308,17 +288,20 @@ class Category
      */
     public function getSummary()
     {
-        if(strlen($this->meaning) > 50){
-            $this->setSummary();
-        }
+        $this->setSummary();
         return $this->summary;
     }
 
     public function setSummary()
     {
-        $this->summary = substr($this->getMeaning(), 0,
-                strlen($this->getmeaning()) / 2
-            ) . "...";
+        if(strlen($this->getMeaning())>50){
+            $this->summary = substr($this->getMeaning(), 0,
+                    strlen($this->getmeaning()) / 2
+                ) . "...";
+        }
+        else {
+            $this->summary = $this->getMeaning();
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-
+    <h4>"Take no part in the unfruitful works of darkness, but instead expose them."(Ephesians 5:11)</h4>
     <div class="container body-content">
         <div class="row">
             {% for symbol in pagination %}
@@ -11,11 +11,7 @@
                             <h2>" {{ symbol.name }}"</h2>
                         </header>
                         <p>
-                            {% if(symbol.summary) %}
-                                {{ symbol.summary }}
-                            {%else %}
-                                {{ symbol.meaning }}
-                            {% endif %}
+                          {{ symbol.summary }}
                         </p>
                         {% if(symbol.image) %}
                         <img src="{{ asset('uploads/images/' ~ symbol.image) }}" width="400" height="200" >

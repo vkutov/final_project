@@ -20,7 +20,7 @@
                         {% if quote.actors is not empty %}
                             Actors:
                             {% for actor in quote.actors%}
-                                <a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.title  }} </a>{{ actor.meaning }}
+                                <br><a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.title  }} </a>(Etymology:{{ actor.summary }})
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -28,7 +28,23 @@
                         {% if quote.categories is not empty %}
                             Category(ies):
                             {% for cat in quote.categories%}
-                                <br><a href="{{ path('category_view', {id: cat.id}) }}">  {{ cat.title }} </a>{{ cat.summary }}
+                                <br><a href="{{ path('category_view', {id: cat.id}) }}">  {{ cat.title }} </a>({{ cat.summary }})
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    <p>
+                        {% if quote.events is not empty %}
+                            Event(s):
+                            {% for event in quote.events%}
+                                <br><a href="{{ path('event_view', {id: event.id}) }}">  {{ event.title }} </a>({{ event.summary }})
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    <p>
+                        {% if quote.symbols is not empty %}
+                            Category(ies):
+                            {% for symbol in quote.symbols%}
+                                <br><a href="{{ path('symbol_view', {id: symbol.id}) }}">  {{ symbol.name}} </a>({{ symbol.summary }})
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -36,7 +52,7 @@
                         {% if related[0] is not null %}
                             Related Quotes:
                             {% for i in 0..related.count-1 %}
-                                <br> <a href="{{ path('quote_view', {id: related[i].id}) }}">  {{ related[i].verse  }} </a>
+                                <br> <a href="{{ path('quote_view', {id: related[i].id}) }}">  {{ related[i].verse  }} </a>({{ quote.summary }})
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -47,7 +63,7 @@
 
                     <p>
                         <div class="pull-right">
-                            <a class="btn btn-danger btn-xs" href="{{ path('quote_delete', {'id':quote.id}) }}">delete &raquo;</a>
+                            {#<a class="btn btn-danger btn-xs" href="{{ path('quote_delete', {'id':quote.id}) }}">delete &raquo;</a>#}
                             <a class="btn btn-success btn-xs" href="{{ path('quote_edit', {'id':quote.id}) }}">edit &raquo;</a>
                             {% endif %}
                     <p>

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-
+    <h4>"Take no part in the unfruitful works of darkness, but instead expose them."(Ephesians 5:11)</h4>
     <div class="container body-content">
         <div class="row">
             {% for actor in pagination %}
@@ -11,11 +11,7 @@
                             <h2>" {{ actor.title }}"</h2>
                         </header>
                         <p>
-                            {% if(actor.summary) %}
-                                {{ actor.summary }}
-                            {%else %}
-                                {{ actor.meaning }}
-                            {% endif %}
+                            {{ actor.summary }}
                         </p>
                         {% if(actor.image) %}
                             <img src="{{ asset('uploads/images/' ~ actor.image) }}" width="400" height="200" >

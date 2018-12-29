@@ -231,17 +231,20 @@ class Quote
      */
     public function getSummary()
     {
-        if(strlen($this->meaning) > 50){
-            $this->setSummary();
-        }
+        $this->setSummary();
         return $this->summary;
     }
 
     public function setSummary()
     {
-        $this->summary = substr($this->getMeaning(), 0,
-                strlen($this->getmeaning()) / 2
-            ) . "...";
+        if(strlen($this->getMeaning())>50){
+            $this->summary = substr($this->getMeaning(), 0,
+                    strlen($this->getmeaning()) / 2
+                ) . "...";
+        }
+        else {
+            $this->summary = $this->getMeaning();
+        }
     }
 
     /**
@@ -277,7 +280,7 @@ class Quote
     }
 
     /**
-     * @return Event[]
+     * @return Symbol[]
      */
     public function getSymbols()
     {

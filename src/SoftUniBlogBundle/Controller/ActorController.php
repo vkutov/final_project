@@ -93,12 +93,12 @@ class ActorController extends Controller
             ->getRepository(Actor::class)
             ->find($id);
         $related=$this->stringToObject($actor);
-        $quotes=$actor->getQuotes();
+//        $quotes=$actor->getQuotes();
 //        $em = $this->getDoctrine()->getManager();
 //        $em->persist($quote);
 //        $em->flush();
         return $this->render('actor/actor.html.twig',
-            ['actor' => $actor, 'quotes' =>$quotes,"related"=>$related]);
+            ['actor' => $actor, "related"=>$related]);
     }
     /**
      * @Route("/actor/edit/{id}", name="actor_edit")

@@ -97,13 +97,11 @@ class EventController extends Controller
         ->getRepository(Event::class)
         ->find($id);
     $related=$this->stringToObject($event);
-    $quotes=$event->getQuotes();
-    $categories=$event->getCategories();
 //        $em = $this->getDoctrine()->getManager();
 //        $em->persist($quote);
 //        $em->flush();
     return $this->render('event/event.html.twig',
-        ['event' => $event, 'quotes' =>$quotes,"categories"=>$categories,"related"=>$related]);
+        ['event' => $event,"related"=>$related]);
      }
     /**
      * @Route("/event/edit/{id}", name="event_edit")
@@ -190,7 +188,6 @@ class EventController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($event);
             $em->flush();
-    //            die("here");
             return $this->redirectToRoute("blog_index");
         }
 

@@ -13,11 +13,7 @@
                         </header>
 
                         <p>
-                            {% if(category.summary) %}
-                                {{ category.summary }}
-                            {%else %}
-                                {{ category.meaning }}
-                            {% endif %}
+                           {{ category.summary }}
                         </p>
                         {% if(category.image) %}
                         <img src="{{ asset('uploads/images/' ~ category.image) }}" width="400" height="200" >

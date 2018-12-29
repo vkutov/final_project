@@ -107,7 +107,7 @@ class Event
      *
      * @param string $title
      *
-     * @return Actor
+     * @return Event
      */
     public function setTitle($title)
     {
@@ -131,7 +131,7 @@ class Event
      *
      * @param string $meaning
      *
-     * @return Actor
+     * @return Event
      */
     public function setMeaning($meaning)
     {
@@ -151,11 +151,10 @@ class Event
     }
 
     /**
-     * Set strifes
      *
      * @param array $quotes
      *
-     * @return Actor
+     * @return Event
      */
     public function setQuotes($quotes)
     {
@@ -174,36 +173,13 @@ class Event
         return $this->quotes;
     }
 
-    /**
-     * Set holidays
-     *
-     * @param array $events
-     *
-     * @return Actor
-     */
-    public function setEvents($events)
-    {
-        $this->events = $events;
-
-        return $this;
-    }
-
-    /**
-     * Get holidays
-     *
-     * @return array
-     */
-    public function getEvents()
-    {
-        return $this->events;
-    }
 
     /**
      * Set categories
      *
      * @param array $categories
      *
-     * @return Actor
+     * @return Event
      */
     public function setCategories($categories)
     {
@@ -220,24 +196,6 @@ class Event
     public function getCategories()
     {
         return $this->categories;
-    }
-
-    /**
-     * @param string $relatedActors
-     */
-    public function setRelatedActors($relatedActors)
-    {
-        $this->relatedActors = $relatedActors;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRelatedActors()
-    {
-        return $this->relatedActors;
     }
 
     /**
@@ -271,23 +229,25 @@ class Event
     {
         $this->author = $author;
     }
-
     /**
      * @return string
      */
     public function getSummary()
     {
-        if (strlen($this->meaning) > 50) {
-            $this->setSummary();
-        }
+        $this->setSummary();
         return $this->summary;
     }
 
     public function setSummary()
     {
-        $this->summary = substr($this->getMeaning(), 0,
-                strlen($this->getmeaning()) / 2
-            ) . "...";
+        if(strlen($this->getMeaning())>50){
+            $this->summary = substr($this->getMeaning(), 0,
+                    strlen($this->getmeaning()) / 2
+                ) . "...";
+        }
+        else {
+            $this->summary = $this->getMeaning();
+        }
     }
 
     /**

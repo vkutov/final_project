@@ -13,11 +13,7 @@
                         </header>
 
                         <p>
-                            {% if(event.summary) %}
-                                {{ event.summary }}
-                            {%else %}
-                                {{ event.meaning }}
-                            {% endif %}
+                          {{ event.summary }}
                          </p>
                         {% if(event.image) %}
                         <img src="{{ asset('uploads/images/' ~ event.image) }}" width="400" height="200" >

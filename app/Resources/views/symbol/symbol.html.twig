@@ -13,10 +13,20 @@
                         Meaning: {{ symbol.meaning }}
                     </p>
                     <p>
+
+                        {% if symbol.quotes is not empty %}
+                            Quotes:
+                            {% for quote in symbol.quotes%}
+                                <a href="{{ path('quote_view', {id: quote.id}) }}">  {{ quote.verse  }} </a>({{ quote.summary  }})
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    <p>
+
                         {% if symbol.actors is not empty %}
                             Actors:
                             {% for actor in symbol.actors%}
-                                <a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.title  }} </a>({{ actor.meaning  }})
+                                <a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.title  }} </a>(Etymology:({{ actor.summary  }}))
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -51,7 +61,7 @@
 
                     <p>
                         <div class="pull-right">
-                            <a class="btn btn-danger btn-xs" href="{{ path('symbol_delete', {'id':symbol.id}) }}">delete &raquo;</a>
+                            {#<a class="btn btn-danger btn-xs" href="{{ path('symbol_delete', {'id':symbol.id}) }}">delete &raquo;</a>#}
                             <a class="btn btn-success btn-xs" href="{{ path('symbol_edit', {'id':symbol.id}) }}">edit &raquo;</a>
                             {% endif %}
                     <p>

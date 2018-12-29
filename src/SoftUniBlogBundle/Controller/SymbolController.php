@@ -2,13 +2,8 @@
 namespace SoftUniBlogBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-//use SoftUniBlogBundle\Entity\Actor;
-//use SoftUniBlogBundle\Entity\Article;
-//use SoftUniBlogBundle\Entity\Comment;
 use SoftUniBlogBundle\Entity\Symbol;
-use SoftUniBlogBundle\Service\QuoteServices;
 use SoftUniBlogBundle\Entity\User;
-use SoftUniBlogBundle\Form\ArticleType;
 use SoftUniBlogBundle\Form\SymbolType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
@@ -87,12 +82,12 @@ class SymbolController extends Controller
             ->getRepository(Symbol::class)
             ->find($id);
         $related=$this->stringToObject($symbol);
-        $actors=$symbol->getActors();
+//        $actors=$symbol->getActors();
 //        $em = $this->getDoctrine()->getManager();
 //        $em->persist($quote);
 //        $em->flush();
         return $this->render('symbol/symbol.html.twig',
-            ['symbol' => $symbol, 'actors' =>$actors,"related"=>$related]);
+            ['symbol' => $symbol, "related"=>$related]);
     }
     /**
      * @Route("/symbol/edit/{id}", name="symbol_edit")

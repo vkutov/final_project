@@ -9,10 +9,6 @@
                     <header>
                         <h2>Event: "{{ event.title }}"</h2>
                     </header>
-
-                    <p>
-                        Place: {{ event.meaning }}
-                    </p>
                     <p>
                         Meaning: {{ event.meaning }}
                     </p>
@@ -20,15 +16,31 @@
                         {% if event.quotes is not empty %}
                             Quote(s):
                             {% for quote in event.quotes%}
-                                <a href="{{ path('event_view', {id: quote.id}) }}">  {{ quote.verse  }} </a>{{ quote.meaning }}
+                                <br> <a href="{{ path('quote_view', {id: quote.id}) }}">  {{ quote.verse  }} </a>({{ quote.summary }})
                             {% endfor %}
                         {% endif %}
                     </p>
                     <p>
                         {% if event.actors is not empty %}
-                            Actors:
+                            Actor(s):
                             {% for actor in event.actors%}
-                                <a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.title  }} </a>{{ actor.meaning }}
+                                <br><a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.title  }} </a>(Etymology:({{ actor.summary }})
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    <p>
+                        {% if event.symbols is not empty %}
+                            Symbol(s):
+                            {% for symbol in event.symbols%}
+                                <br><a href="{{ path('symbol_view', {id: symbol.id}) }}">  {{ symbol.name  }} </a>{{ symbol.summary }}
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    <p>
+                        {% if related[0] is not null %}
+                            Related Events:
+                            {% for i in 0..related.count-1 %}
+                                <br> <a href="{{ path('event_view', {id: event[i].id}) }}">  {{ related[i].title  }} </a>
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -39,7 +51,7 @@
 
                     <p>
                         <div class="pull-right">
-                            <a class="btn btn-danger btn-xs" href="{{ path('event_delete', {'id':event.id}) }}">delete &raquo;</a>
+                            {#<a class="btn btn-danger btn-xs" href="{{ path('event_delete', {'id':event.id}) }}">delete &raquo;</a>#}
                             <a class="btn btn-success btn-xs" href="{{ path('event_edit', {'id':event.id}) }}">edit &raquo;</a>
                             {% endif %}
                     <p>

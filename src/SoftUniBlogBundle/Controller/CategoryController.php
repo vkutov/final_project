@@ -29,10 +29,8 @@ class CategoryController extends Controller
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
-//        var_dump($form->getData());die();
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->getData()->getImage();
-//            var_dump($form->getData()->getActors());die("create");
             if(!is_null($file)) {
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
                 try {
@@ -46,22 +44,8 @@ class CategoryController extends Controller
 //            $relatedQuotes=$quote->getRelatedQuotes();
 //            var_dump($relatedQuotes);die();
             $category->setAuthor($currentUser);
-//            $related='';
-//            foreach($quote->getRelatedQuotes() as $key=>$value){
-//                $related.=','.$value->getId();
-//            }
-//            if(strlen($related)>1) {
-//                $related = substr($related, 1);
-//                $quote->setRelatedQuotes($related);
-//            }
-//            $rq=$quote->getRelatedQuotes();
-//            $quote->setRelatedQuotes($rq);
-//            var_dump($quote);die();
-//            var_dump($this->objectToString($quote));die();
-//            $category->setRelatedQuotes($this->objectToString($category));
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
-//            var_dump($em);die();
             $em->flush();
             return $this->redirectToRoute("blog_index");
         }
@@ -80,22 +64,6 @@ class CategoryController extends Controller
             ->getDoctrine()
             ->getRepository(Category::class)
             ->find($id);
-//        $relation = $this
-//            ->getDoctrine()
-//            ->getRepository(Quote::class)
-//            ->relatedQuotes($id);
-//        $relation=$quote->getRelatedQuotes();
-//        $relation=explode(",",$relation);
-//        $related=[];
-//        foreach($relation as $value){
-//            $sql = $this
-//                ->getDoctrine()
-//                ->getRepository(Quote::class)
-//                ->find($value);
-//            $related[]=$sql;
-//        }
-//        $related['count']=count($relation);
-//        $related=$this->stringToObject($category);
         $actors=$category->getActors();
 //        $em = $this->getDoctrine()->getManager();
 //        $em->persist($quote);
@@ -124,25 +92,7 @@ class CategoryController extends Controller
         if (!$currentUser->isAuthor($category) && !$currentUser->isAdmin()) {
             return $this->redirectToRoute("blog_index");
         }
-//        $related = $this
-//            ->getDoctrine()
-//            ->getRepository(Quote::class)
-//            ->relatedQuotes($id);
-//
-//        $relation=$quote->getRelatedQuotes();
-//        $relation_arr=explode(",",$relation);
-//        $related=[];
-//        foreach($relation_arr as $value){
-//            $sql = $this
-//                ->getDoctrine()
-//                ->getRepository(Quote::class)
-//                ->find($value);
-//            $related[]=$sql;
-//        }
-//        $related['count']=count($relation_arr);
-//        $related=$this->stringToObject($category);
-//        $category->setRelatedCategories($related);
-//        var_dump($quote->getRelatedQuotes());die();
+
         $form = $this->createForm(CategoryType::class, $category);
         $fileName=$category->getImage();
         $form->handleRequest($request);
@@ -196,10 +146,6 @@ class CategoryController extends Controller
         if (!$currentUser->isAuthor($category) && !$currentUser->isAdmin()) {
             return $this->redirectToRoute("blog_index");
         }
-//        var_dump($quote->getRelatedQuotes());die();
-//        $related=$this->stringToObject($quote);
-//        $category->setRelatedQuotes($related);
-//        var_dump($quote->getRelatedQuotes());die();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
