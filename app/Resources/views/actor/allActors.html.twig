@@ -11,7 +11,7 @@
                             <h2>" {{ actor.title }}"</h2>
                         </header>
                         <p>
-                            {{ actor.summary }}
+                            "{{ actor.summary }}"
                         </p>
                         {% if(actor.image) %}
                             <img src="{{ asset('uploads/images/' ~ actor.image) }}" width="400" height="200" >

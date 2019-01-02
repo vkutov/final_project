@@ -17,7 +17,7 @@
                         {% if symbol.quotes is not empty %}
                             Quotes:
                             {% for quote in symbol.quotes%}
-                                <a href="{{ path('quote_view', {id: quote.id}) }}">  {{ quote.verse  }} </a>({{ quote.summary  }})
+                                <br><a href="{{ path('quote_view', {id: quote.id}) }}">  {{ quote.verse  }} </a>({{ quote.summary  }})
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -26,7 +26,7 @@
                         {% if symbol.actors is not empty %}
                             Actors:
                             {% for actor in symbol.actors%}
-                                <a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.title  }} </a>(Etymology:({{ actor.summary  }}))
+                                <br><a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.title  }} </a>(Etymology:({{ actor.summary  }}))
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -47,10 +47,10 @@
                         {% endif %}
                     </p>
                     <p>
-                        {% if related[0] is not null %}
-                            Related Symbols:
-                            {% for i in 0..related.count-1 %}
-                                <br> <a href="{{ path('symbol_view', {id: related[i].id}) }}">  {{ related[i].name  }} </a>
+                        {% if symbol.relatedSymbols is not empty %}
+                            Related Symbol(s):
+                            {% for symbol in symbol.relatedSymbols%}
+                                <br><a href="{{ path('symbol_view', {id: symbol.id}) }}">  {{ symbol.name }} </a>{{ symbol.summary }}
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -61,7 +61,7 @@
 
                     <p>
                         <div class="pull-right">
-                            {#<a class="btn btn-danger btn-xs" href="{{ path('symbol_delete', {'id':symbol.id}) }}">delete &raquo;</a>#}
+                            <a class="btn btn-danger btn-xs" href="{{ path('symbol_delete', {'id':symbol.id}) }}">delete &raquo;</a>
                             <a class="btn btn-success btn-xs" href="{{ path('symbol_edit', {'id':symbol.id}) }}">edit &raquo;</a>
                             {% endif %}
                     <p>

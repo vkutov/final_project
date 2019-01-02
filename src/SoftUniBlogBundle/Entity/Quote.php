@@ -8,6 +8,7 @@
 namespace SoftUniBlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * Quote
@@ -84,7 +85,7 @@ class Quote
     private $events;
     /**
      * @var Symbol[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",mappedBy="quotes")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",inversedBy="quotes")
      * @ORM\JoinTable(name="symbols_quotes",
      *     joinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")}
@@ -92,8 +93,9 @@ class Quote
      */
     private $symbols;
     /**
-     * @var string
-     * @ORM\Column(name="relatedQuotes")
+     * @var Quote[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote")
+     *  @JoinColumn(name="quote_id", referencedColumnName="id")
      */
     private $relatedQuotes;
     /**
@@ -237,7 +239,7 @@ class Quote
 
     public function setSummary()
     {
-        if(strlen($this->getMeaning())>50){
+        if(strlen($this->getMeaning())>80){
             $this->summary = substr($this->getMeaning(), 0,
                     strlen($this->getmeaning()) / 2
                 ) . "...";

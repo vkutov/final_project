@@ -20,30 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class EventController extends Controller
 {
-    public function objectToString(Event $event){
-    $relatedEvents='';
-    foreach($event->getRelatedEvents() as $key=>$value){
-
-        $relatedEvents.=','.$value->getId();
-    }
-    $relatedEvents=substr($relatedEvents,1);
-    return $relatedEvents;
-}
-    public function stringToObject(Event $event){
-    $relation=$event->getRelatedEvents();
-    $relation=explode(",",$relation);
-    $related=[];
-    foreach($relation as $value){
-        $sql = $this
-            ->getDoctrine()
-            ->getRepository(Event::class)
-            ->find($value);
-        $related[]=$sql;
-    }
-    $related['count']=count($relation);
-    return $related;
-}
-
 
     /**
      * @Route("/event/add", name="add_event")
@@ -56,7 +32,6 @@ class EventController extends Controller
         $event = new Event();
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
-//        var_dump($form);die();
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->getData()->getImage();
             if(!is_null($file)) {
@@ -72,8 +47,6 @@ class EventController extends Controller
             }
             $currentUser = $this->getUser();
             $event->setAuthor($currentUser);
-            $this->objectToString($event);
-            $event->setRelatedEvents($this->objectToString($event));
             $em = $this->getDoctrine()->getManager();
             $em->persist($event);
             $em->flush();
@@ -96,12 +69,11 @@ class EventController extends Controller
         ->getDoctrine()
         ->getRepository(Event::class)
         ->find($id);
-    $related=$this->stringToObject($event);
 //        $em = $this->getDoctrine()->getManager();
 //        $em->persist($quote);
 //        $em->flush();
     return $this->render('event/event.html.twig',
-        ['event' => $event,"related"=>$related]);
+        ['event' => $event]);
      }
     /**
      * @Route("/event/edit/{id}", name="event_edit")
@@ -121,8 +93,6 @@ class EventController extends Controller
         }
         /** @var User $currentUser */
 
-        $related=$this->stringToObject($event);
-        $event->setRelatedEvents($related);
         $form = $this->createForm(EventType::class, $event);
         $fileName=$event->getImage();
         $form->handleRequest($request);
@@ -142,8 +112,6 @@ class EventController extends Controller
             $event->setImage($fileName);
             $currentUser = $this->getUser();
             $event->setAuthor($currentUser);
-            $ra=$this->objectToString($event);
-            $event->setRelatedEvents($ra);
             $em = $this->getDoctrine()->getManager();
             $em->merge($event);
             $em->flush();
@@ -151,7 +119,7 @@ class EventController extends Controller
     }
     return $this->render('event/edit.html.twig',
         ['form' => $form->createView(),
-            'event' => $event,'related'=>$related]);
+            'event' => $event]);
 }
     /**
      * @Route("/event/delete/{id}", name="event_delete")
@@ -177,8 +145,6 @@ class EventController extends Controller
         if (!$currentUser->isAuthor($event) && !$currentUser->isAdmin()) {
             return $this->redirectToRoute("blog_index");
         }
-        $related=$this->stringToObject($event);
-        $event->setRelatedEvents($related);
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 

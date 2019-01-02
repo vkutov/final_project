@@ -16,7 +16,7 @@
                         {% if category.quotes is not empty %}
                             Quote(s):
                             {% for quote in category.quotes%}
-                                <br><a href="{{ path('quote_view', {id: quote.id}) }}">  {{ quote.verse  }} </a>(Etymology:{{ quote.summary }})
+                                <br><a href="{{ path('quote_view', {id: quote.id}) }}">  {{ quote.verse  }} </a>(Meaning`:{{ quote.summary }})
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -24,7 +24,7 @@
                         {% if category.actors is not empty %}
                             Actors:
                             {% for actor in category.actors%}
-                                <br><a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.id  }} </a>{{ actor.summary }}
+                                <br><a href="{{ path('actor_view', {id: actor.id}) }}">  {{ actor.title  }} </a>({{ actor.summary }})
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -32,7 +32,7 @@
                         {% if category.events is not empty %}
                             Event:
                             {% for event in category.events%}
-                                <br> <a href="{{ path('event_view', {id: event.id}) }}">  {{ event.name  }} </a>{{ event.summary }}
+                                <br> <a href="{{ path('event_view', {id: event.id}) }}">  {{ event.title  }} </a>({{ event.summary }})
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -40,18 +40,18 @@
                         {% if category.symbols is not empty %}
                             Symbols:
                             {% for symbol in category.symbols%}
-                                <br><a href="{{ path('symbol_view', {id: symbol.id}) }}">  {{ symbol.name  }} </a>{{ symbol.summary }}
+                                <br><a href="{{ path('symbol_view', {id: symbol.id}) }}">  {{ symbol.name  }} </a>({{ symbol.summary }})
                             {% endfor %}
                         {% endif %}
                     </p>
                     {% if(category.image) %}
-                        <img src="{{ asset('uploads/images/' ~ quote.image) }}" width="400" height="200" >
+                        <img src="{{ asset('uploads/images/' ~ category.image) }}" width="400" height="200" >
                     {% endif %}
                     {% if app.getUser().getId==category.author.id or app.getUser().isAdmin() %}
 
                     <p>
                         <div class="pull-right">
-                            {#<a class="btn btn-danger btn-xs" href="{{ path('category_delete', {'id':category.id}) }}">delete &raquo;</a>#}
+                            <a class="btn btn-danger btn-xs" href="{{ path('category_delete', {'id':category.id}) }}">delete &raquo;</a>
                             <a class="btn btn-success btn-xs" href="{{ path('category_edit', {'id':category.id}) }}">edit &raquo;</a>
                             {% endif %}
                     <p>

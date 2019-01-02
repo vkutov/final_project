@@ -15,32 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ActorController extends Controller
 {
-
-    public function objectToString(Actor $actor){
-        $relatedActors='';
-        foreach($actor->getRelatedActors() as $key=>$value){
-
-            $relatedActors.=','.$value->getId();
-        }
-        $relatedActors=substr($relatedActors,1);
-        return $relatedActors;
-    }
-    public function stringToObject(Actor $actor){
-        $relation=$actor->getRelatedActors();
-        $relation=explode(",",$relation);
-        $related=[];
-        foreach($relation as $value){
-            $sql = $this
-                ->getDoctrine()
-                ->getRepository(Actor::class)
-                ->find($value);
-            $related[]=$sql;
-        }
-        $related['count']=count($relation);
-        return $related;
-    }
-
-
     /**
      * @Route("/actor/add", name="add_actor")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
@@ -68,8 +42,6 @@ class ActorController extends Controller
             }
             $currentUser = $this->getUser();
             $actor->setAuthor($currentUser);
-            $this->objectToString($actor);
-            $actor->setRelatedActors($this->objectToString($actor));
             $em = $this->getDoctrine()->getManager();
             $em->persist($actor);
             $em->flush();
@@ -92,13 +64,12 @@ class ActorController extends Controller
             ->getDoctrine()
             ->getRepository(Actor::class)
             ->find($id);
-        $related=$this->stringToObject($actor);
 //        $quotes=$actor->getQuotes();
 //        $em = $this->getDoctrine()->getManager();
 //        $em->persist($quote);
 //        $em->flush();
         return $this->render('actor/actor.html.twig',
-            ['actor' => $actor, "related"=>$related]);
+            ['actor' => $actor]);
     }
     /**
      * @Route("/actor/edit/{id}", name="actor_edit")
@@ -119,8 +90,6 @@ class ActorController extends Controller
         }
         /** @var User $currentUser */
 
-        $related=$this->stringToObject($actor);
-        $actor->setRelatedActors($related);
         $form = $this->createForm(ActorType::class, $actor);
         $fileName=$actor->getImage();
         $form->handleRequest($request);
@@ -140,16 +109,14 @@ class ActorController extends Controller
             $actor->setImage($fileName);
             $currentUser = $this->getUser();
             $actor->setAuthor($currentUser);
-            $ra=$this->objectToString($actor);
-            $actor->setRelatedActors($ra);
             $em = $this->getDoctrine()->getManager();
             $em->merge($actor);
             $em->flush();
             return $this->redirectToRoute("blog_index");
         }
-        return $this->render('bible/edit.html.twig',
+        return $this->render('actor/edit.html.twig',
             ['form' => $form->createView(),
-                'actor' => $actor,'related'=>$related]);
+                'actor' => $actor]);
     }
     /**
      * @Route("/actor/delete/{id}", name="actor_delete")
@@ -175,8 +142,6 @@ class ActorController extends Controller
         if (!$currentUser->isAuthor($actor) && !$currentUser->isAdmin()) {
             return $this->redirectToRoute("blog_index");
         }
-        $related=$this->stringToObject($actor);
-        $actor->setRelatedActors($related);
         $form = $this->createForm(ActorType::class, $actor);
         $form->handleRequest($request);
 

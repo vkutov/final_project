@@ -27,15 +27,31 @@
                         {% if actor.categories is not empty %}
                             Category(ies):
                             {% for cat in actor.categories%}
-                                <br><a href="{{ path('category_view', {id: cat.id}) }}">  {{ cat.title }} </a>{{ cat.summary }}
+                                <br><a href="{{ path('category_view', {id: cat.id}) }}">  {{ cat.title }} </a>({{ cat.summary }})
                             {% endfor %}
                         {% endif %}
                     </p>
                     <p>
-                        {% if related[0] is not null %}
+                        {% if actor.events is not empty %}
+                            Event(s):
+                            {% for event in actor.events%}
+                                <br><a href="{{ path('event_view', {id: event.id}) }}">  {{ event.title }} </a>({{ event.summary }})
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    <p>
+                        {% if actor.symbols is not empty %}
+                            Symbol(s):
+                            {% for symbol in actor.symbols%}
+                                <br><a href="{{ path('symbol_view', {id: symbol.id}) }}">  {{ symbol.name }} </a>({{ symbol.summary }})
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    <p>
+                        {% if actor.relatedActors is not empty %}
                             Related Actors:
-                            {% for i in 0..related.count-1 %}
-                                <br> <a href="{{ path('actor_view', {id: related[i].id}) }}">  {{ related[i].title  }} </a>
+                            {% for related in actor.relatedActors%}
+                                <br><a href="{{ path('actor_view', {id: related.id}) }}">  {{ related.title }} </a>({{ related.summary }})
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -46,7 +62,7 @@
 
                     <p>
                         <div class="pull-right">
-                            {#<a class="btn btn-danger btn-xs" href="{{ path('actor_delete', {'id':actor.id}) }}">delete &raquo;</a>#}
+                            <a class="btn btn-danger btn-xs" href="{{ path('actor_delete', {'id':actor.id}) }}">delete &raquo;</a>
                             <a class="btn btn-success btn-xs" href="{{ path('actor_edit', {'id':actor.id}) }}">edit &raquo;</a>
                             {% endif %}
                     <p>

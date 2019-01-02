@@ -3,6 +3,7 @@
 namespace SoftUniBlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * Actor
@@ -77,8 +78,9 @@ class Symbol
      */
     private $events;
     /**
-     * @var string
-     * @ORM\Column(name="relatedActors")
+     * @var Symbol[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol")
+     *  @JoinColumn(name="symbol_id", referencedColumnName="id")
      */
     private $relatedSymbols;
     /**
@@ -282,7 +284,7 @@ class Symbol
 
     public function setSummary()
     {
-        if(strlen($this->getMeaning())>50){
+        if(strlen($this->getMeaning())>80){
             $this->summary = substr($this->getMeaning(), 0,
                     strlen($this->getmeaning()) / 2
                 ) . "...";

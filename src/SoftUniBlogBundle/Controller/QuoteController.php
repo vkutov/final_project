@@ -12,28 +12,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 class QuoteController extends Controller
 {
-    public function objectToString(Quote $quote){
-        $relatedQuotes='';
-        foreach($quote->getRelatedQuotes() as $key=>$value){
-            $relatedQuotes.=','.$value->getId();
-        }
-        $relatedQuotes=substr($relatedQuotes,1);
-        return $relatedQuotes;
-    }
-    public function stringToObject(Quote $quote){
-        $relation=$quote->getRelatedQuotes();
-        $relation=explode(",",$relation);
-        $related=[];
-        foreach($relation as $value){
-            $sql = $this
-                ->getDoctrine()
-                ->getRepository(Quote::class)
-                ->find($value);
-            $related[]=$sql;
-        }
-        $related['count']=count($relation);
-        return $related;
-    }
+
     /**
      * @Route("/quote/add", name="add_quote")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
@@ -58,7 +37,7 @@ class QuoteController extends Controller
             }
             $currentUser = $this->getUser();
             $quote->setAuthor($currentUser);
-            $quote->setRelatedQuotes($this->objectToString($quote));
+//            $quote->setRelatedQuotes($this->objectToString($quote));
             $em = $this->getDoctrine()->getManager();
             $em->persist($quote);
             $em->flush();
@@ -80,13 +59,13 @@ class QuoteController extends Controller
             ->getRepository(Quote::class)
             ->find($id);
 
-        $related=$this->stringToObject($quote);
+//        $related=$this->stringToObject($quote);
 //        $actors=$quote->getActors();
 //        $em = $this->getDoctrine()->getManager();
 //        $em->persist($quote);
 //        $em->flush();
         return $this->render('bible/quote.html.twig',
-            ['quote' => $quote,"related"=>$related]);
+            ['quote' => $quote]);
     }
     /**
      * @Route("/quote/edit/{id}", name="quote_edit")
@@ -109,8 +88,8 @@ class QuoteController extends Controller
         if (!$currentUser->isAuthor($quote) && !$currentUser->isAdmin()) {
             return $this->redirectToRoute("blog_index");
         }
-        $related=$this->stringToObject($quote);
-        $quote->setRelatedQuotes($related);
+//        $related=$this->stringToObject($quote);
+//        $quote->setRelatedQuotes($related);
         $form = $this->createForm(QuoteType::class, $quote);
         $fileName=$quote->getImage();
         $form->handleRequest($request);
@@ -129,8 +108,8 @@ class QuoteController extends Controller
             $quote->setImage($fileName);
             $currentUser = $this->getUser();
             $quote->setAuthor($currentUser);
-            $rq=$this->objectToString($quote);
-            $quote->setRelatedQuotes($rq);
+//            $rq=$this->objectToString($quote);
+//            $quote->setRelatedQuotes($rq);
             $em = $this->getDoctrine()->getManager();
             $em->merge($quote);
             $em->flush();
@@ -138,7 +117,7 @@ class QuoteController extends Controller
         }
         return $this->render('bible/edit.html.twig',
             ['form' => $form->createView(),
-                'quote' => $quote,'related'=>$related]);
+                'quote' => $quote]);
     }
     /**
      * @Route("/quote/delete/{id}", name="quote_delete")
@@ -161,8 +140,8 @@ class QuoteController extends Controller
         if (!$currentUser->isAuthor($quote) && !$currentUser->isAdmin()) {
             return $this->redirectToRoute("blog_index");
         }
-        $related=$this->stringToObject($quote);
-        $quote->setRelatedQuotes($related);
+//        $related=$this->stringToObject($quote);
+//        $quote->setRelatedQuotes($related);
         $form = $this->createForm(QuoteType::class, $quote);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

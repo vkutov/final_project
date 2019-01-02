@@ -49,10 +49,10 @@
                         {% endif %}
                     </p>
                     <p>
-                        {% if related[0] is not null %}
+                        {% if quote.relatedQuotes is not empty %}
                             Related Quotes:
-                            {% for i in 0..related.count-1 %}
-                                <br> <a href="{{ path('quote_view', {id: related[i].id}) }}">  {{ related[i].verse  }} </a>({{ quote.summary }})
+                            {% for related in quote.relatedQuotes%}
+                                <br> <a href="{{ path('quote_view', {id: related.id}) }}">  {{ related.verse  }} </a>({{ quote.summary }})
                             {% endfor %}
                         {% endif %}
                     </p>
@@ -63,7 +63,7 @@
 
                     <p>
                         <div class="pull-right">
-                            {#<a class="btn btn-danger btn-xs" href="{{ path('quote_delete', {'id':quote.id}) }}">delete &raquo;</a>#}
+                            <a class="btn btn-danger btn-xs" href="{{ path('quote_delete', {'id':quote.id}) }}">delete &raquo;</a>
                             <a class="btn btn-success btn-xs" href="{{ path('quote_edit', {'id':quote.id}) }}">edit &raquo;</a>
                             {% endif %}
                     <p>

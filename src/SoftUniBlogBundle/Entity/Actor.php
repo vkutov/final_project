@@ -3,6 +3,7 @@
 namespace SoftUniBlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * Actor
@@ -40,9 +41,10 @@ class Actor
      * @ORM\Column(name="meaning", type="string", length=255, nullable=false)
      */
     private $meaning;
+
     /**
      * @var Quote[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote",mappedBy="actors")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote",inversedBy="actors")
      * @ORM\JoinTable(name="actors_quotes",
      *     joinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")}
@@ -51,7 +53,7 @@ class Actor
     private $quotes;
     /**
      * @var Category[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Category",inversedBy="actors")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Category")
      * @ORM\JoinTable(name="cat_actors",
      *     joinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")}
@@ -60,7 +62,7 @@ class Actor
     private $categories;
     /**
      * @var Event[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event",mappedBy="actors")
+         * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event",inversedBy="actors")
      * @ORM\JoinTable(name="events_actors",
      *     joinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")}
@@ -69,7 +71,7 @@ class Actor
     private $events;
     /**
      * @var Symbol[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",mappedBy="actors")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",inversedBy="actors")
          * @ORM\JoinTable(name="symbols_actors",
          *     joinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")},
          *     inverseJoinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")}
@@ -77,8 +79,9 @@ class Actor
      */
     private $symbols;
     /**
-     * @var string
-     * @ORM\Column(name="relatedActors")
+     * @var Quote[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Actor")
+     *  @JoinColumn(name="actor_id", referencedColumnName="id")
      */
     private $relatedActors;
     /**
@@ -282,7 +285,7 @@ class Actor
 
     public function setSummary()
     {
-        if(strlen($this->getMeaning())>50){
+        if(strlen($this->getMeaning())>70){
             $this->summary = substr($this->getMeaning(), 0,
                     strlen($this->getmeaning()) / 2
                 ) . "...";

@@ -12,28 +12,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 class SymbolController extends Controller
 {
-    public function objectToString(Symbol $symbol){
-        $relatedSymbols='';
-        foreach($symbol->getRelatedSymbols() as $key=>$value){
-            $relatedSymbols.=','.$value->getId();
-        }
-        $relatedSymbols=substr($relatedSymbols,1);
-        return $relatedSymbols;
-    }
-    public function stringToObject(Symbol $symbol){
-        $relation=$symbol->getRelatedSymbols();
-        $relation=explode(",",$relation);
-        $related=[];
-        foreach($relation as $value){
-            $sql = $this
-                ->getDoctrine()
-                ->getRepository(Symbol::class)
-                ->find($value);
-            $related[]=$sql;
-        }
-        $related['count']=count($relation);
-        return $related;
-    }
+
     /**
      * @Route("/symbol/add", name="add_symbol")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
@@ -60,7 +39,6 @@ class SymbolController extends Controller
             }
             $currentUser = $this->getUser();
             $symbol->setAuthor($currentUser);
-            $symbol->setRelatedSymbols($this->objectToString($symbol));
             $em = $this->getDoctrine()->getManager();
             $em->persist($symbol);
             $em->flush();
@@ -81,13 +59,11 @@ class SymbolController extends Controller
             ->getDoctrine()
             ->getRepository(Symbol::class)
             ->find($id);
-        $related=$this->stringToObject($symbol);
-//        $actors=$symbol->getActors();
 //        $em = $this->getDoctrine()->getManager();
 //        $em->persist($quote);
 //        $em->flush();
         return $this->render('symbol/symbol.html.twig',
-            ['symbol' => $symbol, "related"=>$related]);
+            ['symbol' => $symbol]);
     }
     /**
      * @Route("/symbol/edit/{id}", name="symbol_edit")
@@ -110,9 +86,6 @@ class SymbolController extends Controller
         if (!$currentUser->isAuthor($symbol) && !$currentUser->isAdmin()) {
             return $this->redirectToRoute("blog_index");
         }
-        $related=$this->stringToObject($symbol);
-        $symbol->setRelatedSymbols($related);
-//        var_dump($quote->getRelatedQuotes());die();
         $form = $this->createForm(SymbolType::class, $symbol);
         $fileName=$symbol->getImage();
         $form->handleRequest($request);
@@ -131,9 +104,6 @@ class SymbolController extends Controller
             $symbol->setImage($fileName);
             $currentUser = $this->getUser();
             $symbol->setAuthor($currentUser);
-            $rs=$this->objectToString($symbol);
-//            var_dump($form->getData()->getActors());die();
-            $symbol->setRelatedSymbols($rs);
             $em = $this->getDoctrine()->getManager();
             $em->merge($symbol);
             $em->flush();
@@ -141,7 +111,7 @@ class SymbolController extends Controller
         }
         return $this->render('symbol/edit.html.twig',
             ['form' => $form->createView(),
-                'symbol' => $symbol,'related'=>$related]);
+                'symbol' => $symbol]);
     }
     /**
      * @Route("/symbol/delete/{id}", name="symbol_delete")
@@ -164,10 +134,6 @@ class SymbolController extends Controller
         if (!$currentUser->isAuthor($symbol) && !$currentUser->isAdmin()) {
             return $this->redirectToRoute("blog_index");
         }
-//        var_dump($quote->getRelatedQuotes());die();
-        $related=$this->stringToObject($symbol);
-        $symbol->setRelatedSymbols($related);
-//        var_dump($quote->getRelatedQuotes());die();
         $form = $this->createForm(SymbolType::class, $symbol);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

@@ -1,60 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    {#{% for actor in quote.actors %}#}
-        {#<p>#}
-            {#Content: <a href="{{ path('actor_show', {'id': actor.id}) }}">{{ actor.title }}</a>#}
-        {#</p>#}
-    {#{% endfor %}#}
+
     {{ form(form) }}
-    {#<div class="container body-content span=8 offset=2">#}
-    {#<div class="well">#}
-    {#<form class="form-horizontal" enctype="multipart/form-data" action="{{ path('add_strife') }}" method="POST">#}
-    {#<fieldset>#}
-    {#<legend>New Quote</legend>#}
-
-    {#<div class="form-group">#}
-    {#<label class="col-sm-4 control-label" for="article_title">Verse</label>#}
-    {#<div class="col-sm-4 ">#}
-    {#<input type="text" class="form-control" id="article_title" placeholder="Strife"#}
-    {#name="quote[strife]">#}
-    {#</div>#}
-    {#</div>#}
-    {#<div class="form-group">#}
-    {#<label class="col-sm-4 control-label" for="article_title">Place</label>#}
-    {#<div class="col-sm-4 ">#}
-    {#<input type="text" class="form-control" id="article_title" placeholder="Place"#}
-    {#name="quote[place]">#}
-    {#</div>#}
-    {#</div>#}
-    {#<div class="form-group">#}
-    {#<label class="col-sm-4 control-label" for="article_content">Meaning</label>#}
-    {#<div class="col-sm-6">#}
-    {#<textarea class="form-control" rows="6" id="article_content"#}
-    {#name="quote[meaning]"></textarea>#}
-    {#</div>#}
-    {#</div>#}
-
-    {#<div class="form-group">#}
-    {#<label class="col-sm-4 control-label" for="quote_image">Image</label>#}
-    {#<div class="col-sm-4 ">#}
-    {#<input type="file" accept=".jpg, .png" class="form-control" id="article_image" placeholder="Image"#}
-    {#name="quote[image]">#}
-    {#</div>#}
-    {#</div>#}
-
-    {#{{ form_row(form._token) }}#}
-
-    {#<div class="form-group">#}
-    {#<div class="col-sm-4 col-sm-offset-4">#}
-    {#<a class="btn btn-default" href="{{ path('blog_index') }}">Cancel</a>#}
-    {#<button type="submit" class="btn btn-primary">Submit</button>#}
-    {#</div>#}
-    {#</div>#}
-    {#</fieldset>#}
-    {#</form>#}
-    {#</div>#}
-    {#</div>#}
-
 
 {% endblock %}

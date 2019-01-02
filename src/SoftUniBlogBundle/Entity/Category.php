@@ -43,7 +43,7 @@ class Category
 
     /**
      * @var Actor[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Actor",mappedBy="categories")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Actor")
      * @ORM\JoinTable(name="cat_actors",
      *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")}
@@ -52,7 +52,7 @@ class Category
     private $actors;
     /**
      * @var Quote[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote"), mappedBy="categories"
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote" )
      * @ORM\JoinTable(name="cat_quotes",
      *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")}
@@ -61,24 +61,22 @@ class Category
     private $quotes;
     /**
      * @var Event[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event", mappedBy="categories")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event")
      * @ORM\JoinTable(name="cat_events",
      *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")}
+     *     inverseJoinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")}
      * )
      */
     private $events;
-
     /**
      * @var Symbol[]
      * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",mappedBy="categories")
-         * @ORM\JoinTable(name="symbols_cat",
-         *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
-         *     inverseJoinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")}
-         * )
+     * @ORM\JoinTable(name="symbols_cat",
+     *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")}
+     * )
      */
     private $symbols;
-
     /**
      * @var string
      *
@@ -294,7 +292,7 @@ class Category
 
     public function setSummary()
     {
-        if(strlen($this->getMeaning())>50){
+        if(strlen($this->getMeaning())>80){
             $this->summary = substr($this->getMeaning(), 0,
                     strlen($this->getmeaning()) / 2
                 ) . "...";

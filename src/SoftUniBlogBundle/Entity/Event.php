@@ -3,6 +3,7 @@
 namespace SoftUniBlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * Event
@@ -51,7 +52,16 @@ class Event
     private $quotes;
     /**
      * @var Actor[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Actor",inversedBy="events")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Category",inversedBy="events")
+     * @ORM\JoinTable(name="events_actors",
+     *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")}
+     * )
+     */
+    private $categories;
+    /**
+     * @var Event[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Actor",mappedBy="events")
      * @ORM\JoinTable(name="events_actors",
      *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")}
@@ -59,26 +69,18 @@ class Event
      */
     private $actors;
     /**
-     * @var Category[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Category",inversedBy="events")
-     * @ORM\JoinTable(name="cat_events",
+     * @var Symbol[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol")
+     * @ORM\JoinTable(name="symbols_events",
      *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")}
+     *     inverseJoinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")}
      * )
-     */
-    private $categories;
-    /**
-     * @var Event[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",mappedBy="events")
-         * @ORM\JoinTable(name="symbols_events",
-         *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
-         *     inverseJoinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")}
-         * )
      */
     private $symbols;
     /**
-     * @var string
-     * @ORM\Column(name="relatedEvents")
+     * @var Event[]
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event")
+     *  @JoinColumn(name="event_id", referencedColumnName="id")
      */
     private $relatedEvents;
     /**
@@ -240,7 +242,7 @@ class Event
 
     public function setSummary()
     {
-        if(strlen($this->getMeaning())>50){
+        if(strlen($this->getMeaning())>80){
             $this->summary = substr($this->getMeaning(), 0,
                     strlen($this->getmeaning()) / 2
                 ) . "...";
