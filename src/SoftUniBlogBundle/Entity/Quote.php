@@ -76,7 +76,7 @@ class Quote
     private $categories;
     /**
      * @var Event[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event",mappedBy="quotes")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event")
      * @ORM\JoinTable(name="events_quotes",
      *     joinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")}

@@ -2,29 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4afb5a4f-9d5d-4817-899c-9210c8f8b97c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/actor/edit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/actor/actor.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/actor/actor.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/actor/allActors.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/actor/allActors.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/bible/quote.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/bible/quote.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/category/allCategories.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/category/allCategories.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/category/category.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/category/category.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/event/delete.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/event/delete.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/event/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/event/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/event/event.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/event/event.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/symbol/symbol.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/symbol/symbol.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/ActorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/ActorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/EventController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/QuoteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/QuoteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/SymbolController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/SymbolController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Actor.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Actor.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Event.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Quote.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Quote.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Symbol.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Symbol.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Form/ActorType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SoftUniBlogBundle/Form/ActorType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Service/QuoteServices.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SoftUniBlogBundle/Service/QuоteServicesInterface.php" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -55,8 +35,8 @@
       <file leaf-file-name="Quote.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Quote.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="78" column="82" selection-start-line="78" selection-start-column="82" selection-end-line="78" selection-end-column="82" />
+            <state relative-caret-position="170">
+              <caret line="77" column="19" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="19" />
               <folding>
                 <element signature="e#127#159#0#PHP" expanded="true" />
               </folding>
@@ -67,8 +47,8 @@
       <file leaf-file-name="Symbol.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Symbol.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="68" column="7" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="7" />
+            <state relative-caret-position="106">
+              <caret line="69" column="12" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="12" />
               <folding>
                 <element signature="e#44#76#0#PHP" expanded="true" />
               </folding>
@@ -80,7 +60,7 @@
         <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Event.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="63" column="68" selection-start-line="63" selection-start-column="68" selection-end-line="63" selection-end-column="86" />
+              <caret line="63" column="82" selection-start-line="63" selection-start-column="82" selection-end-line="63" selection-end-column="82" />
               <folding>
                 <element signature="e#44#76#0#PHP" expanded="true" />
               </folding>
@@ -91,8 +71,8 @@
       <file leaf-file-name="Actor.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Actor.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="64" column="72" selection-start-line="64" selection-start-column="72" selection-end-line="64" selection-end-column="72" />
+            <state relative-caret-position="106">
+              <caret line="65" selection-start-line="65" selection-end-line="68" selection-end-column="8" />
               <folding>
                 <element signature="e#44#76#0#PHP" expanded="true" />
               </folding>
@@ -136,8 +116,8 @@
       <file leaf-file-name="Category.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Category.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="79">
-              <caret line="45" column="87" selection-start-line="45" selection-start-column="87" selection-end-line="45" selection-end-column="87" />
+            <state relative-caret-position="113">
+              <caret line="72" column="69" selection-start-line="72" selection-start-column="69" selection-end-line="72" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -230,13 +210,13 @@
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/ActorController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/category/category.html.twig" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Form/ActorType.php" />
-        <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Quote.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/event/delete.html.twig" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Symbol.php" />
-        <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Category.php" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Event.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/actor/actor.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/event/event.html.twig" />
+        <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Category.php" />
+        <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Quote.php" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Actor.php" />
       </list>
     </option>
@@ -552,12 +532,12 @@
       <workItem from="1545583778668" duration="45568000" />
       <workItem from="1545818692546" duration="59638000" />
       <workItem from="1545997390106" duration="2788000" />
-      <workItem from="1546004780586" duration="81776000" />
+      <workItem from="1546004780586" duration="84201000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="330001000" />
+    <option name="totallyTimeSpent" value="332426000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -577,8 +557,8 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.013071896" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.39542484" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8312236" visible="true" weight="0.23524962" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.39542484" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8312236" visible="true" weight="0.23524962" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.20272315" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32843137" />
@@ -936,16 +916,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Quote.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="78" column="82" selection-start-line="78" selection-start-column="82" selection-end-line="78" selection-end-column="82" />
-          <folding>
-            <element signature="e#127#159#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/event/delete.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-159">
@@ -983,30 +953,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Symbol.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="68" column="7" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="7" />
-          <folding>
-            <element signature="e#44#76#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/actor/actor.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
           <caret line="36" column="56" selection-start-line="36" selection-start-column="56" selection-end-line="36" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Event.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="63" column="68" selection-start-line="63" selection-start-column="68" selection-end-line="63" selection-end-column="86" />
-          <folding>
-            <element signature="e#44#76#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1030,17 +980,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Symbol.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="69" column="12" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="12" />
+          <folding>
+            <element signature="e#44#76#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Category.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="45" column="87" selection-start-line="45" selection-start-column="87" selection-end-line="45" selection-end-column="87" />
+        <state relative-caret-position="113">
+          <caret line="72" column="69" selection-start-line="72" selection-start-column="69" selection-end-line="72" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Quote.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="77" column="19" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="19" />
+          <folding>
+            <element signature="e#127#159#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Event.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="63" column="82" selection-start-line="63" selection-start-column="82" selection-end-line="63" selection-end-column="82" />
+          <folding>
+            <element signature="e#44#76#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Actor.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="64" column="72" selection-start-line="64" selection-start-column="72" selection-end-line="64" selection-end-column="72" />
+        <state relative-caret-position="106">
+          <caret line="65" selection-start-line="65" selection-end-line="68" selection-end-column="8" />
           <folding>
             <element signature="e#44#76#0#PHP" expanded="true" />
           </folding>

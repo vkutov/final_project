@@ -70,7 +70,7 @@ class Category
     private $events;
     /**
      * @var Symbol[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol",mappedBy="categories")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol")
      * @ORM\JoinTable(name="symbols_cat",
      *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")}
