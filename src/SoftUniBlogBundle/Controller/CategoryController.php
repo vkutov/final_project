@@ -149,8 +149,8 @@ class CategoryController extends Controller
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $currentUser = $this->getUser();
-            $category->setAuthor($currentUser);
+//            $currentUser = $this->getUser();
+//            $category->setAuthor($currentUser);
             $em = $this->getDoctrine()->getManager();
             $em->remove($category);
             $em->flush();

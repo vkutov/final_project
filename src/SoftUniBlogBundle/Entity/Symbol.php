@@ -38,7 +38,7 @@ class Symbol
     /**
      * @var string
      *
-     * @ORM\Column(name="meaning", type="string", length=255, nullable=false)
+     * @ORM\Column(name="meaning", type="string",  nullable=false)
      */
     private $meaning;
     /**

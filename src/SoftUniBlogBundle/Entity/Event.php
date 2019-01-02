@@ -38,7 +38,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="meaning", type="string", length=255, nullable=false)
+     * @ORM\Column(name="meaning", type="string", nullable=false)
      */
     private $meaning;
     /**
@@ -51,16 +51,16 @@ class Event
      */
     private $quotes;
     /**
-     * @var Actor[]
+     * @var Category[]
      * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Category",inversedBy="events")
-     * @ORM\JoinTable(name="events_actors",
+     * @ORM\JoinTable(name="cat_events",
      *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")}
+     *     inverseJoinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")}
      * )
      */
     private $categories;
     /**
-     * @var Event[]
+     * @var Actor[]
      * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Actor",mappedBy="events")
      * @ORM\JoinTable(name="events_actors",
      *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},

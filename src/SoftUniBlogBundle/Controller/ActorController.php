@@ -146,8 +146,8 @@ class ActorController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $currentUser = $this->getUser();
-            $actor->setAuthor($currentUser);
+//            $currentUser = $this->getUser();
+//            $actor->setAuthor($currentUser);
             $em = $this->getDoctrine()->getManager();
             $em->remove($actor);
             $em->flush();

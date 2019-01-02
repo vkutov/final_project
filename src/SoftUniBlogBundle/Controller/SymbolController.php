@@ -137,8 +137,8 @@ class SymbolController extends Controller
         $form = $this->createForm(SymbolType::class, $symbol);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $currentUser = $this->getUser();
-            $symbol->setAuthor($currentUser);
+//            $currentUser = $this->getUser();
+//            $symbol->setAuthor($currentUser);
             $em = $this->getDoctrine()->getManager();
             $em->remove($symbol);
             $em->flush();

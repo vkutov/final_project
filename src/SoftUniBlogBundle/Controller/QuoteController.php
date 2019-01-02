@@ -106,10 +106,8 @@ class QuoteController extends Controller
                 }
             }
             $quote->setImage($fileName);
-            $currentUser = $this->getUser();
-            $quote->setAuthor($currentUser);
-//            $rq=$this->objectToString($quote);
-//            $quote->setRelatedQuotes($rq);
+//            $currentUser = $this->getUser();
+//            $quote->setAuthor($currentUser);
             $em = $this->getDoctrine()->getManager();
             $em->merge($quote);
             $em->flush();

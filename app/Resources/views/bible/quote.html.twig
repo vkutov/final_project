@@ -52,7 +52,7 @@
                         {% if quote.relatedQuotes is not empty %}
                             Related Quotes:
                             {% for related in quote.relatedQuotes%}
-                                <br> <a href="{{ path('quote_view', {id: related.id}) }}">  {{ related.verse  }} </a>({{ quote.summary }})
+                                <br> <a href="{{ path('quote_view', {id: related.id}) }}">  {{ related.verse  }} </a>({{ related.summary }})
                             {% endfor %}
                         {% endif %}
                     </p>
