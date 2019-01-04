@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-
+    <body background='uploads/images/pentagram.jpg'>
     <div class="container body-content">
         <div class="row">
             <div class="col-md-12">
@@ -39,7 +39,7 @@
                         {% endif %}
                     </p>
                     <p>
-                        {% if symbol.categories is not empty %}
+                        {% if symbol.events is not empty %}
                             Event(s):
                             {% for event in symbol.events%}
                                 <br><a href="{{ path('event_view', {id: event.id}) }}">  {{ event.title }} </a>{{ event.summary }}

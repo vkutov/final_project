@@ -43,7 +43,7 @@ class Category
 
     /**
      * @var Actor[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Actor")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Actor",cascade={"persist"})
      * @ORM\JoinTable(name="cat_actors",
      *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="actor_id", referencedColumnName="id")}
@@ -52,7 +52,7 @@ class Category
     private $actors;
     /**
      * @var Quote[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote" )
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Quote", cascade={"persist"})
      * @ORM\JoinTable(name="cat_quotes",
      *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")}
@@ -61,7 +61,7 @@ class Category
     private $quotes;
     /**
      * @var Event[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event",cascade={"persist"})
      * @ORM\JoinTable(name="cat_events",
      *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")}
@@ -70,7 +70,7 @@ class Category
     private $events;
     /**
      * @var Symbol[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Symbol", cascade={"persist"})
      * @ORM\JoinTable(name="symbols_cat",
      *     joinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="symbol_id", referencedColumnName="id")}

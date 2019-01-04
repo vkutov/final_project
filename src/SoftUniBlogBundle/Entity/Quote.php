@@ -52,8 +52,8 @@ class Quote
     private $image;
 
     /**
-     * @var string
-     * @ORM\Column(name="meaning",nullable=false)
+     * @var "object"
+     * @ORM\Column(name="meaning",length=65532,nullable=false)
      */
     private $meaning;
     /**
@@ -67,7 +67,7 @@ class Quote
     private $actors;
     /**
      * @var Category[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Category",inversedBy="quotes")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Category",inversedBy="quotes", cascade={"persist"})
      * @ORM\JoinTable(name="cat_quotes",
      *     joinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="cat_id", referencedColumnName="id")}
@@ -76,7 +76,7 @@ class Quote
     private $categories;
     /**
      * @var Event[]
-     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event")
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Event", cascade={"persist"})
      * @ORM\JoinTable(name="events_quotes",
      *     joinColumns={@ORM\JoinColumn(name="quote_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")}
