@@ -2,17 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4afb5a4f-9d5d-4817-899c-9210c8f8b97c" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/web/uploads/images/crescent.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/actor/add.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/actor/add.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/bible/add.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/bible/add.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/bible/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/bible/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/category/add.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/category/add.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/category/allCategories.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/category/allCategories.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/actor/allActors.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/actor/allActors.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/category/category.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/category/category.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/category/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/category/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/event/add.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/event/add.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/symbol/add.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/symbol/add.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/uploads/images/pentagram.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/web/uploads/images/pentagram.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/event/allEvents.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/event/allEvents.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/symbol/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/symbol/edit.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -40,20 +35,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="edit.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/bible/edit.html.twig">
+      <file leaf-file-name="category.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/category/category.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/category/edit.html.twig">
+      <file leaf-file-name="allActors.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/actor/allActors.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+            <state relative-caret-position="51">
+              <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="allEvents.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/event/allEvents.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="45" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="allCategories.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/category/allCategories.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="42" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="42" />
               <folding>
                 <element signature="e#12#26#0#Twig" expanded="true" />
               </folding>
@@ -106,8 +125,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Repository/QuoteRepository.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/article/delete.html.twig" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Service/QuoteServicesInterface.php" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Service/QuuteServicesInterface.php" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Service/QuoteServices.php" />
@@ -124,7 +141,6 @@
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Form/CategoryType.php" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Form/EventType.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/symbol/delete.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/event/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Controller/HomeController.php" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Form/ActorType.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/event/delete.html.twig" />
@@ -139,7 +155,6 @@
         <option value="$PROJECT_DIR$/app/Resources/views/symbol/allSymbols.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
         <option value="$PROJECT_DIR$/web/css/style.css" />
-        <option value="$PROJECT_DIR$/app/Resources/views/symbol/symbol.html.twig" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Symbol.php" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Category.php" />
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Quote.php" />
@@ -147,9 +162,6 @@
         <option value="$PROJECT_DIR$/src/SoftUniBlogBundle/Entity/Event.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/category/allCategories.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/actor/actor.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/actor/allActors.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/event/allEvents.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/category/category.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/category/add.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/actor/add.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/event/add.html.twig" />
@@ -157,6 +169,13 @@
         <option value="$PROJECT_DIR$/app/Resources/views/bible/add.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/bible/edit.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/category/edit.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/event/edit.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/actor/edit.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/symbol/edit.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/symbol/symbol.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/category/category.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/event/allEvents.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/actor/allActors.html.twig" />
       </list>
     </option>
   </component>
@@ -495,12 +514,12 @@
       <workItem from="1545583778668" duration="45568000" />
       <workItem from="1545818692546" duration="59638000" />
       <workItem from="1545997390106" duration="2788000" />
-      <workItem from="1546004780586" duration="109806000" />
+      <workItem from="1546004780586" duration="110598000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="358031000" />
+    <option name="totallyTimeSpent" value="358823000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -601,15 +620,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/symbol/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Repository/SymbolRepository.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -643,9 +653,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/actor/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SoftUniBlogBundle/Form/CategoryType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -670,16 +677,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/event/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -767,16 +764,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/symbol/allSymbols.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="39" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/css/bootstrap-datetimepicker.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="101">
@@ -788,16 +775,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="1247" column="10" selection-start-line="1247" selection-start-column="10" selection-end-line="1247" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/symbol/symbol.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -862,16 +839,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/category/allCategories.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="42" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="42" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/bible/quote.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="918">
@@ -879,37 +846,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/event/allEvents.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="35" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/actor/allActors.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="48" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/actor/actor.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="25" selection-start-line="3" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/category/category.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="52" selection-start-line="3" selection-start-column="52" selection-end-line="3" selection-end-column="52" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -975,6 +915,90 @@
           <folding>
             <element signature="e#12#26#0#Twig" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/event/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/actor/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/symbol/allSymbols.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="48" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/symbol/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/symbol/symbol.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="9" column="49" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="49" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/category/allCategories.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="42" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="42" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/category/category.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/event/allEvents.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="45" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/actor/allActors.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
         </state>
       </provider>
     </entry>
