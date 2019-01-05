@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4afb5a4f-9d5d-4817-899c-9210c8f8b97c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/web/uploads/images/crescent.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/actor/allActors.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/actor/allActors.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/category/category.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/category/category.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/event/allEvents.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/event/allEvents.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/symbol/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/symbol/edit.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/final.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog.sql" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,7 +43,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="allActors.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="allActors.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/actor/allActors.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
@@ -78,6 +74,11 @@
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="final.sql" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/final.sql">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -460,11 +461,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\PHP_Web\ark\admin_blog\admin_blog" />
       <recent name="C:\xampp\htdocs\PHP_Web\ark\admin_blog\admin_blog\web\uploads\images" />
       <recent name="C:\xampp\htdocs\PHP_Web\ark\admin_blog\admin_blog\app\Resources\views\actor" />
       <recent name="C:\xampp\htdocs\PHP_Web\ark\admin_blog\admin_blog\app\Resources\views\symbol" />
       <recent name="C:\xampp\htdocs\PHP_Web\ark\admin_blog\admin_blog\app\Resources\views\event" />
-      <recent name="C:\xampp\htdocs\PHP_Web\ark\admin_blog\admin_blog\app\Resources\views\category" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\PHP_Web\ark\admin_blog\admin_blog" />
@@ -514,12 +515,12 @@
       <workItem from="1545583778668" duration="45568000" />
       <workItem from="1545818692546" duration="59638000" />
       <workItem from="1545997390106" duration="2788000" />
-      <workItem from="1546004780586" duration="110598000" />
+      <workItem from="1546004780586" duration="110789000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="358823000" />
+    <option name="totallyTimeSpent" value="359014000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -567,13 +568,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/bible/delete.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="75" selection-start-line="33" selection-start-column="75" selection-end-line="33" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/category/delete.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -965,16 +959,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/category/allCategories.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="42" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="42" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/category/category.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -1001,6 +985,19 @@
           <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/category/allCategories.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="42" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="42" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/final.sql">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
