@@ -418,5 +418,5 @@ $hasMinorProblems = (bool) count($minorProblems);
             </div>
             <div class="version">Symfony Standard Edition</div>
         </div>
-    </body>
+    </body> 
 </html>
